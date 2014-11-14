@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">美食</string>
+
+    <!-- drawer string array -->
+    <string name="drawer_choice">吃什么</string>
+    <string name="drawer_edit_item">美食地点</string>
+    <string name="drawer_setting">设置</string>
+
+
+    <string name="drawer_open">打开抽屉</string>
+    <string name="drawer_close">关掉抽屉</string>
+
+</resources>

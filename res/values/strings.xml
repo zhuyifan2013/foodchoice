@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FoodChoice</string>
+
+    <!-- drawer string array -->
+    <string name="drawer_choice">Choice</string>
+    <string name="drawer_edit_item">Edit Item</string>
+    <string name="drawer_setting">Settings</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+</resources>
