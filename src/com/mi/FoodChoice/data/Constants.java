@@ -1,4 +1,4 @@
-package com.mi.FoodChoice;
+package com.mi.FoodChoice.data;
 
 public class Constants {
 

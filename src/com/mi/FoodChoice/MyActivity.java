@@ -2,17 +2,21 @@ package com.mi.FoodChoice;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import com.mi.FoodChoice.data.Constants;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class MyActivity extends Activity {
@@ -95,10 +99,28 @@ public class MyActivity extends Activity {
     }
 
     private void selectItem(int position) {
+        Fragment fragment;
+        FragmentManager fragmentManager = getFragmentManager();
+
         switch (position) {
             case Constants.MAKE_CHOICE:
                 mDrawerList.setItemChecked(position, true);
-                mDrawerLayout.closeDrawer();
+                mDrawerLayout.closeDrawer(mDrawerList);
+                break;
+            case Constants.EDIT_FOOD_SHOP:
+                Log.i("hello", "edit_shop");
+                fragment = new ShopEditFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
+                mDrawerList.setItemChecked(position, true);
+                mDrawerLayout.closeDrawer(mDrawerList);
+                break;
+            case Constants.SETTING:
+                mDrawerList.setItemChecked(position, true);
+                mDrawerLayout.closeDrawer(mDrawerList);
+                break;
+            default:
+                mDrawerList.setItemChecked(position, true);
+                mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
 }
