@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">美食</string>
-
+    <string name="delete">删除</string>
     <!-- drawer string array -->
     <string name="drawer_choice">吃什么</string>
     <string name="drawer_edit_item">美食地点</string>
@@ -10,5 +10,41 @@
 
     <string name="drawer_open">打开抽屉</string>
     <string name="drawer_close">关掉抽屉</string>
+
+    <!-- menu -->
+    <string name="action_bar_add">添加美食地点</string>
+
+    <!-- shop edit-->
+    <string name="shop_edit_name_tip">商户名字 :</string>
+    <string name="shop_edit_spinner_taste_prompt">选择一种口味 :</string>
+    <string name="shop_edit_dialog_add_shop_title">添加商户</string>
+    <string name="shop_edit_ok_btn">添加</string>
+    <string name="shop_edit_no_btn">先等等</string>
+    <string name="shop_edit_text_empty_toast">商户名称不能为空</string>
+    <string name="shop_edit_nothing_select_tip">您什么都没有选择</string>
+
+    <!-- taste array-->
+    <string name="taste_chuancai">川菜</string>
+    <string name="taste_hunan">湘菜</string>
+    <string name="taste_dongbei">东北菜</string>
+    <string name="taste_hangzhou">杭州菜</string>
+    <string name="taste_zonghe">综合类</string>
+
+    <!-- price array-->
+    <string name="price_level1">小于15元</string>
+    <string name="price_level2">15~25元</string>
+    <string name="price_level3">25~35元</string>
+    <string name="price_level4">35~50元</string>
+    <string name="price_level5">50~70元</string>
+    <string name="price_level6">70~100元</string>
+    <string name="price_level7">土豪</string>
+
+    <!-- distance array-->
+    <string name="distance_level1">咫尺之遥</string>
+    <string name="distance_level2">步行15分钟</string>
+    <string name="distance_level3">步行25分钟</string>
+    <string name="distance_level4">徒步不可至</string>
+
+
 
 </resources>

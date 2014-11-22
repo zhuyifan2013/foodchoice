@@ -19,8 +19,7 @@ import android.widget.ListView;
 import com.mi.FoodChoice.data.Constants;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-public class MyActivity extends Activity {
-    private String[] mPlaneTitles;
+public class DrawerActivity extends Activity {
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -71,7 +70,7 @@ public class MyActivity extends Activity {
     }
 
     private void initDrawerLayout(){
-        mPlaneTitles = getResources().getStringArray(R.array.drawer_array);
+        String[] mPlaneTitles = getResources().getStringArray(R.array.drawer_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -104,11 +103,12 @@ public class MyActivity extends Activity {
 
         switch (position) {
             case Constants.MAKE_CHOICE:
+                fragment = new MakeChoiceFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
                 mDrawerList.setItemChecked(position, true);
                 mDrawerLayout.closeDrawer(mDrawerList);
                 break;
             case Constants.EDIT_FOOD_SHOP:
-                Log.i("hello", "edit_shop");
                 fragment = new ShopEditFragment();
                 fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
                 mDrawerList.setItemChecked(position, true);

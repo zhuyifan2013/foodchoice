@@ -4,16 +4,22 @@
           android:versionCode="1"
           android:versionName="0.1">
     <uses-sdk android:minSdkVersion="19"/>
+
     <application
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/Theme.Main">
-        <activity android:name="MyActivity"
+        <activity android:name=".DrawerActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="com.mi.FoodChoice.data.FoodDbProvider"
+            android:authorities="com.mi.foodchoice"
+            android:exported="false"/>
     </application>
 </manifest>

@@ -19,11 +19,11 @@ public class FoodDbHelper extends SQLiteOpenHelper {
     }
 
     private void createTable(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE" +
+        db.execSQL("CREATE TABLE " +
         FoodDatabase.TABLE_SHOP + "(" +
-        FoodDatabase.ShopTable._ID + " INTEGER PROMARY KEY AUTOINCREMENT,  " +
+        FoodDatabase.ShopTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,  " +
         FoodDatabase.ShopTable.NAME + " TEXT, " +
-        FoodDatabase.ShopTable.PRICE + "TEXT, " +
+        FoodDatabase.ShopTable.PRICE + " TEXT, " +
         FoodDatabase.ShopTable.TASTE_TYPE + " TEXT, " +
         FoodDatabase.ShopTable.DISTANCE + " TEXT " + ")");
     }

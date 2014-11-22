@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_item_padding">20dp</dimen>
+    <dimen name="list_item_margin_right">10dp</dimen>
+
+    <!-- dialog text-->
+    <dimen name="dialog_text_normal_tip">18sp</dimen>
+    <!-- dialog dimen-->
+    <dimen name="dialog_margin_top">20dp</dimen>
+    <dimen name="dialog_padding">20dp</dimen>
+</resources>

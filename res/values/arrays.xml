@@ -5,4 +5,29 @@
         <item>@string/drawer_edit_item</item>
         <item>@string/drawer_setting</item>
     </string-array>
+
+    <string-array name="taste_array">
+        <item>@string/taste_zonghe</item>
+        <item>@string/taste_chuancai</item>
+        <item>@string/taste_hunan</item>
+        <item>@string/taste_dongbei</item>
+        <item>@string/taste_hangzhou</item>
+    </string-array>
+
+    <string-array name="price_array">
+        <item>@string/price_level1</item>
+        <item>@string/price_level2</item>
+        <item>@string/price_level3</item>
+        <item>@string/price_level4</item>
+        <item>@string/price_level5</item>
+        <item>@string/price_level6</item>
+        <item>@string/price_level7</item>
+    </string-array>
+
+    <string-array name="distance_array">
+        <item>@string/distance_level1</item>
+        <item>@string/distance_level2</item>
+        <item>@string/distance_level3</item>
+        <item>@string/distance_level4</item>
+    </string-array>
 </resources>
