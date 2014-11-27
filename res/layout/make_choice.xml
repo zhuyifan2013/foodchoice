@@ -2,15 +2,18 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <Button
+    <com.mi.FoodChoice.ui.CircleButton
         android:id="@+id/make_choice"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/choice"/>
+        android:src="@drawable/choice"
+        app:cb_color="#CB4042"
+        app:cb_pressedRingWidth="8dp"/>
 
 </RelativeLayout>

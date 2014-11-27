@@ -43,7 +43,7 @@ public class ShopEditFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        initArray();
+        mshopArray = FoodHelper.initShopArray(getActivity());
         mAdapter = new MyAdapter(mshopArray, mContext);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -62,7 +62,7 @@ public class ShopEditFragment extends Fragment {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
                 mshopArray.clear();
-                initArray();
+                mshopArray = FoodHelper.initShopArray(getActivity());
                 mAdapter.notifyDataSetChanged();
             }
         };
@@ -86,30 +86,6 @@ public class ShopEditFragment extends Fragment {
                 break;
         }
         return true;
-    }
-
-    private void initArray() {
-        ShopItem shopItem;
-        Cursor cursor;
-        cursor = mContext.getContentResolver()
-                .query(FoodDatabase.ShopTable.URI_SHOP_TABLE, null, null, null, null);
-        if (cursor == null) {
-            return;
-        }
-
-        while (cursor.moveToNext()) {
-            shopItem = new ShopItem();
-            shopItem.setId(cursor.getInt(cursor.getColumnIndex(FoodDatabase.ShopTable._ID)));
-            shopItem.setShopName(
-                    cursor.getString(cursor.getColumnIndex(FoodDatabase.ShopTable.NAME)));
-            shopItem.setPrice(
-                    cursor.getString(cursor.getColumnIndex(FoodDatabase.ShopTable.PRICE)));
-            shopItem.setTaste(
-                    cursor.getString(cursor.getColumnIndex(FoodDatabase.ShopTable.TASTE_TYPE)));
-            shopItem.setDistance(
-                    cursor.getString(cursor.getColumnIndex(FoodDatabase.ShopTable.DISTANCE)));
-            mshopArray.add(0, shopItem);
-        }
     }
 
     private class MyAdapter extends BaseAdapter {
