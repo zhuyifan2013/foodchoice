@@ -7,9 +7,10 @@ public class ShopItem implements Parcelable {
 
     private int mId;
     private String mShopName;
-    private String mPrice;
-    private String mTaste;
-    private String mDistance;
+    private int mGroup;
+    private int mPrice;
+    private int mTaste;
+    private int mDistance;
 
     @Override
     public int describeContents() {
@@ -20,9 +21,10 @@ public class ShopItem implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(mId);
         dest.writeString(mShopName);
-        dest.writeString(mPrice);
-        dest.writeString(mTaste);
-        dest.writeString(mDistance);
+        dest.writeInt(mGroup);
+        dest.writeInt(mPrice);
+        dest.writeInt(mTaste);
+        dest.writeInt(mDistance);
     }
 
     public static final Creator<ShopItem> CREATOR = new Creator<ShopItem>() {
@@ -41,9 +43,10 @@ public class ShopItem implements Parcelable {
     private ShopItem(Parcel in) {
         mId = in.readInt();
         mShopName = in.readString();
-        mPrice = in.readString();
-        mTaste = in.readString();
-        mDistance = in.readString();
+        mGroup = in.readInt();
+        mPrice = in.readInt();
+        mTaste = in.readInt();
+        mDistance = in.readInt();
     }
 
     public ShopItem() {
@@ -65,27 +68,35 @@ public class ShopItem implements Parcelable {
         mShopName = shopName;
     }
 
-    public String getPrice() {
+    public int getGroup() {
+        return mGroup;
+    }
+
+    public void setGroup(int group) {
+        mGroup = group;
+    }
+
+    public int getPrice() {
         return mPrice;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         mPrice = price;
     }
 
-    public String getTaste() {
+    public int getTaste() {
         return mTaste;
     }
 
-    public void setTaste(String taste) {
+    public void setTaste(int taste) {
         mTaste = taste;
     }
 
-    public String getDistance() {
+    public int getDistance() {
         return mDistance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(int distance) {
         mDistance = distance;
     }
 

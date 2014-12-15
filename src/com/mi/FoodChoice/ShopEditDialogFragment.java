@@ -1,12 +1,7 @@
 package com.mi.FoodChoice;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +11,6 @@ import com.mi.FoodChoice.data.Constants;
 import com.mi.FoodChoice.data.FoodDatabase;
 import com.mi.FoodChoice.data.ShopItem;
 import com.mi.FoodChoice.ui.CircleButton;
-import org.w3c.dom.Text;
 
 public class ShopEditDialogFragment extends DialogFragment {
 
@@ -81,8 +75,7 @@ public class ShopEditDialogFragment extends DialogFragment {
         tasteSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mShopItem.setTaste(
-                        getActivity().getString(FoodHelper.getTasteIdAtPostion(position)));
+                mShopItem.setTaste(position + 1);
             }
 
             @Override
@@ -94,8 +87,7 @@ public class ShopEditDialogFragment extends DialogFragment {
         priceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mShopItem.setPrice(
-                        getActivity().getString(FoodHelper.getPriceIdAtPosition(position)));
+                mShopItem.setPrice(position + 1);
             }
 
             @Override
@@ -107,8 +99,7 @@ public class ShopEditDialogFragment extends DialogFragment {
         distanceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mShopItem.setDistance(
-                        getActivity().getString(FoodHelper.getDistanceIdAtPosition(position)));
+                mShopItem.setDistance(position + 1);
             }
 
             @Override

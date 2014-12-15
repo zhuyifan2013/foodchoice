@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">美食</string>
     <string name="delete">删除</string>
+
+    <string name="make_choice_result">你选中的商家是:<xliff:g id="result">%1$s</xliff:g></string>
+    <string name="make_choice_result_default">快来选择吧！</string>
     <!-- drawer string array -->
     <string name="drawer_choice">吃什么</string>
     <string name="drawer_edit_item">美食地点</string>
     <string name="drawer_setting">设置</string>
-
 
     <string name="drawer_open">打开抽屉</string>
     <string name="drawer_close">关掉抽屉</string>

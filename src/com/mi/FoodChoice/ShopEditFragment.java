@@ -3,11 +3,10 @@ package com.mi.FoodChoice;
 import android.app.Fragment;
 import android.content.Context;
 import android.database.ContentObserver;
-import android.database.Cursor;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.mi.FoodChoice.data.Constants;
@@ -16,14 +15,18 @@ import com.mi.FoodChoice.data.ShopItem;
 
 import java.util.ArrayList;
 
-public class ShopEditFragment extends Fragment {
+public class ShopEditFragment extends Fragment implements View.OnClickListener {
 
     private ListView mListView;
+    private Button mGroupBtn;
+    private PopupWindow mPopupWindow;
+
     private MyAdapter mAdapter;
 
     private Context mContext;
     private ContentObserver mObserver;
-    private ArrayList<ShopItem> mshopArray = new ArrayList<ShopItem>();
+
+    private ShopListManager mShopListManager = ShopListManager.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class ShopEditFragment extends Fragment {
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.shop_edit, container, false);
         mListView = (ListView) view.findViewById(R.id.list);
+        mGroupBtn = (Button) view.findViewById(R.id.group_filter);
         return view;
     }
 
@@ -43,8 +47,13 @@ public class ShopEditFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        mshopArray = FoodHelper.initShopArray(getActivity());
-        mAdapter = new MyAdapter(mshopArray, mContext);
+        mGroupBtn.setOnClickListener(this);
+
+        if (mShopListManager.getShopList() == null) {
+            showToast("出错了!");
+        }
+
+        mAdapter = new MyAdapter(mShopListManager.getShopList(), mContext);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -61,8 +70,9 @@ public class ShopEditFragment extends Fragment {
         mObserver = new ContentObserver(new Handler()) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
-                mshopArray.clear();
-                mshopArray = FoodHelper.initShopArray(getActivity());
+                mShopListManager.getShopList().clear();
+                mShopListManager.setShopList(FoodHelper.getShopList(getActivity()));
+                mAdapter.updateDataSet(mShopListManager.getShopList());
                 mAdapter.notifyDataSetChanged();
             }
         };
@@ -88,6 +98,40 @@ public class ShopEditFragment extends Fragment {
         return true;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.group_filter:
+            case R.id.price_filter:
+                if (initPopupWindow(v)) {
+                    mPopupWindow.showAsDropDown(v, 10, 10);
+                }
+                break;
+        }
+    }
+
+    private boolean initPopupWindow(View v) {
+        if (mPopupWindow != null) {
+            if (mPopupWindow.isShowing()) {
+                mPopupWindow.dismiss();
+                return false;
+            }
+        }
+
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        View popUpView;
+
+        switch (v.getId()) {
+            case R.id.group_filter:
+                popUpView = inflater.inflate(R.layout.popup_group, null);
+                mPopupWindow = new PopupWindow(popUpView, ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                mPopupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.list_bg));
+                mPopupWindow.setOutsideTouchable(true);
+        }
+        return true;
+    }
+
     private class MyAdapter extends BaseAdapter {
 
         private ArrayList<ShopItem> mShopArray;
@@ -98,14 +142,18 @@ public class ShopEditFragment extends Fragment {
             mContext = context;
         }
 
+        public void updateDataSet(ArrayList<ShopItem> shopArray) {
+            mShopArray = shopArray;
+        }
+
         @Override
         public int getCount() {
-            return mshopArray.size();
+            return mShopArray.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return mshopArray.get(position);
+            return mShopArray.get(position);
         }
 
         @Override
@@ -129,9 +177,12 @@ public class ShopEditFragment extends Fragment {
             }
 
             viewHolder.shopName.setText(mShopArray.get(position).getShopName());
-            viewHolder.priceText.setText(mShopArray.get(position).getPrice());
-            viewHolder.tasteText.setText(mShopArray.get(position).getTaste());
-            viewHolder.distanceText.setText(mShopArray.get(position).getDistance());
+            viewHolder.priceText
+                    .setText(FoodHelper.getPriceStrById(mShopArray.get(position).getPrice()));
+            viewHolder.tasteText
+                    .setText(FoodHelper.getTasteStrById(mShopArray.get(position).getTaste()));
+            viewHolder.distanceText
+                    .setText(FoodHelper.getDistanceStrById(mShopArray.get(position).getDistance()));
 
             return convertView;
         }
@@ -144,4 +195,9 @@ public class ShopEditFragment extends Fragment {
             TextView distanceText;
         }
     }
+
+    private void showToast(CharSequence msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+    }
+
 }

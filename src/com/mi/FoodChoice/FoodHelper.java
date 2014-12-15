@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import com.mi.FoodChoice.data.FoodDatabase;
 import com.mi.FoodChoice.data.ShopItem;
+import com.mi.FoodChoice.data.Constants;
 
 import java.util.ArrayList;
 
@@ -11,85 +12,80 @@ public class FoodHelper {
 
     private static final int ERROR_CODE = -1;
 
-    private static final int TASTE_ZONGHE = 0;
-    private static final int TASTE_CHUANCAI = 1;
-    private static final int TASTE_XIANGCAI = 2;
-    private static final int TASTE_DONGBEI = 3;
-    private static final int TASTE_HANGZHOU = 4;
-
-    private static final int PRICE_LEVEL1 = 0;
-    private static final int PRICE_LEVEL2 = 1;
-    private static final int PRICE_LEVEL3 = 2;
-    private static final int PRICE_LEVEL4 = 3;
-    private static final int PRICE_LEVEL5 = 4;
-    private static final int PRICE_LEVEL6 = 5;
-    private static final int PRICE_LEVEL7 = 6;
-
-    private static final int DISTANCE_LEVEL1 = 0;
-    private static final int DISTANCE_LEVEL2 = 1;
-    private static final int DISTANCE_LEVEL3 = 2;
-    private static final int DISTANCE_LEVEL4 = 3;
-
-    public static int getTasteIdAtPostion(int postion) {
-        switch (postion) {
-            case TASTE_ZONGHE:
+    public static int getTasteStrById(int id) {
+        switch (id) {
+            case Constants.TASTE_ID_ZONGHE:
                 return R.string.taste_zonghe;
-            case TASTE_CHUANCAI:
+            case Constants.TASTE_ID_CHUANCAI:
                 return R.string.taste_chuancai;
-            case TASTE_XIANGCAI:
+            case Constants.TASTE_ID_XIANGCAI:
                 return R.string.taste_hunan;
-            case TASTE_DONGBEI:
+            case Constants.TASTE_ID_DONGBEI:
                 return R.string.taste_dongbei;
-            case TASTE_HANGZHOU:
+            case Constants.TASTE_ID_HANGZHOU:
                 return R.string.taste_hangzhou;
             default:
                 return ERROR_CODE;
         }
     }
 
-    public static int getPriceIdAtPosition(int position) {
-        switch (position) {
-            case PRICE_LEVEL1:
+    public static int getPriceStrById(int id) {
+        switch (id) {
+            case Constants.PRICE_ID_LEVEL1:
                 return R.string.price_level1;
-            case PRICE_LEVEL2:
+            case Constants.PRICE_ID_LEVEL2:
                 return R.string.price_level2;
-            case PRICE_LEVEL3:
+            case Constants.PRICE_ID_LEVEL3:
                 return R.string.price_level3;
-            case PRICE_LEVEL4:
+            case Constants.PRICE_ID_LEVEL4:
                 return R.string.price_level4;
-            case PRICE_LEVEL5:
+            case Constants.PRICE_ID_LEVEL5:
                 return R.string.price_level5;
-            case PRICE_LEVEL6:
+            case Constants.PRICE_ID_LEVEL6:
                 return R.string.price_level6;
-            case PRICE_LEVEL7:
+            case Constants.PRICE_ID_LEVEL7:
                 return R.string.price_level7;
             default:
                 return ERROR_CODE;
         }
     }
 
-    public static int getDistanceIdAtPosition(int position) {
-        switch (position) {
-            case DISTANCE_LEVEL1:
+    public static int getDistanceStrById(int id) {
+        switch (id) {
+            case Constants.DISTANCE_ID_LEVEL1:
                 return R.string.distance_level1;
-            case DISTANCE_LEVEL2:
+            case Constants.DISTANCE_ID_LEVEL2:
                 return R.string.distance_level2;
-            case DISTANCE_LEVEL3:
+            case Constants.DISTANCE_ID_LEVEL3:
                 return R.string.distance_level3;
-            case DISTANCE_LEVEL4:
+            case Constants.DISTANCE_ID_LEVEL4:
                 return R.string.distance_level4;
             default:
                 return ERROR_CODE;
         }
     }
 
-    public static ArrayList<ShopItem> initShopArray(Context context) {
+    public static ArrayList<ShopItem> getShopList(Context context) {
+        return getShopList(context, -1);
+    }
+
+    /**
+     * get shop list by group id
+     */
+    public static ArrayList<ShopItem> getShopList(Context context, int group) {
+        String selection = FoodDatabase.ShopTable.GROUP + "=?";
+        String[] selectionArgs = new String[] { Integer.toString(group) };
+        if (-1 == group) {
+            selection = null;
+            selectionArgs = null;
+        }
         ArrayList<ShopItem> shopArrayList = new ArrayList<ShopItem>();
         ShopItem shopItem;
         Cursor cursor = null;
         try {
             cursor = context.getContentResolver()
-                    .query(FoodDatabase.ShopTable.URI_SHOP_TABLE, null, null, null, null);
+                    .query(FoodDatabase.ShopTable.URI_SHOP_TABLE, null, selection, selectionArgs,
+                            null);
             if (cursor == null) {
                 return null;
             }
@@ -99,12 +95,14 @@ public class FoodHelper {
                 shopItem.setId(cursor.getInt(cursor.getColumnIndex(FoodDatabase.ShopTable._ID)));
                 shopItem.setShopName(
                         cursor.getString(cursor.getColumnIndex(FoodDatabase.ShopTable.NAME)));
+                shopItem.setGroup(
+                        cursor.getInt(cursor.getColumnIndex(FoodDatabase.ShopTable.GROUP)));
                 shopItem.setPrice(
-                        cursor.getString(cursor.getColumnIndex(FoodDatabase.ShopTable.PRICE)));
+                        cursor.getInt(cursor.getColumnIndex(FoodDatabase.ShopTable.PRICE)));
                 shopItem.setTaste(
-                        cursor.getString(cursor.getColumnIndex(FoodDatabase.ShopTable.TASTE_TYPE)));
+                        cursor.getInt(cursor.getColumnIndex(FoodDatabase.ShopTable.TASTE_TYPE)));
                 shopItem.setDistance(
-                        cursor.getString(cursor.getColumnIndex(FoodDatabase.ShopTable.DISTANCE)));
+                        cursor.getInt(cursor.getColumnIndex(FoodDatabase.ShopTable.DISTANCE)));
                 shopArrayList.add(0, shopItem);
             }
         } finally {
