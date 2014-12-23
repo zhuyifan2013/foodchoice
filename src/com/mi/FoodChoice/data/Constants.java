@@ -10,11 +10,11 @@ public class Constants {
 
     public static final int MAKE_CHOICE = 0;
 
-    public static final int EDIT_FOOD_SHOP = 1;
-
-    public static final int SETTING = 2;
+    public static final int SETTING = 1;
 
     public static final String SHOP_ITEM = "shop_item";
+
+    public static final String KEY_SHOP = "shop";
 
     //dialog action id
     public  static final String ACTION_ID = "action_id";
@@ -28,27 +28,17 @@ public class Constants {
 
     public static final String PREF_FIRST_LAUNCH = "first_launch";
 
+    public static final String PREF_UNEXPECTED_SHOP = "unexpected";
+
     //Messages
     public static final int MSG_INIT_FINISH = 1;
 
-    //IDs for types
-    public static final int TASTE_ID_ZONGHE = 1;
-    public static final int TASTE_ID_CHUANCAI = 2;
-    public static final int TASTE_ID_XIANGCAI = 3;
-    public static final int TASTE_ID_DONGBEI = 4;
-    public static final int TASTE_ID_HANGZHOU = 5;
+    public static final int MSG_CHOICE_FINISH = 2;
 
-    public static final int PRICE_ID_LEVEL1 = 1; //<15
-    public static final int PRICE_ID_LEVEL2 = 2; //15~25
-    public static final int PRICE_ID_LEVEL3 = 3; //25~35
-    public static final int PRICE_ID_LEVEL4 = 4; //35~50
-    public static final int PRICE_ID_LEVEL5 = 5; //50~70
-    public static final int PRICE_ID_LEVEL6 = 6; //70~100
-    public static final int PRICE_ID_LEVEL7 = 7; // ^-^
+    public static final int MSG_NO_SUITABLE_SHOP = 3;
 
-    public static final int DISTANCE_ID_LEVEL1 = 1; //very near
-    public static final int DISTANCE_ID_LEVEL2 = 2; //15 mins
-    public static final int DISTANCE_ID_LEVEL3 = 3; //25 mins
-    public static final int DISTANCE_ID_LEVEL4 = 4; //very far
+    //Date Format
+    public static final String DATE_PATTEN_1 = "yyyy-MM-dd";
+
 
 }

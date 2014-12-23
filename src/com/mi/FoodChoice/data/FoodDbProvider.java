@@ -16,12 +16,12 @@ public class FoodDbProvider extends ContentProvider {
     private static FoodDbHelper mFoodDbHelper;
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
-    public static final int URI_SHOP = 0;
-    public static final int URI_SHOP_ITEM = 1;
+    public static final int URI_UNEXPECTED_SHOP = 0;
+    public static final int URI_UNEXPECTED_SHOP_ITEM = 1;
 
     static {
-        sUriMatcher.addURI(AUTHORITY, "shop", URI_SHOP);
-        sUriMatcher.addURI(AUTHORITY, "shop/#", URI_SHOP_ITEM);
+        sUriMatcher.addURI(AUTHORITY, "unexpected_shop", URI_UNEXPECTED_SHOP);
+        sUriMatcher.addURI(AUTHORITY, "unexpected_shop/#", URI_UNEXPECTED_SHOP_ITEM);
     }
 
     @Override
@@ -36,9 +36,9 @@ public class FoodDbProvider extends ContentProvider {
         Cursor cursor = null;
         SQLiteDatabase db = mFoodDbHelper.getReadableDatabase();
         switch (sUriMatcher.match(uri)) {
-            case URI_SHOP:
-                projection = FoodDatabase.PROJECTION_SHOP;
-                cursor = db.query(FoodDatabase.TABLE_SHOP, projection, selection, selectionArgs,
+            case URI_UNEXPECTED_SHOP:
+                projection = FoodDatabase.PROJECTION_UNEXPECTED_SHOP;
+                cursor = db.query(FoodDatabase.TABLE_UNEXPECTED_SHOP, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
         }
@@ -55,11 +55,11 @@ public class FoodDbProvider extends ContentProvider {
         SQLiteDatabase db = mFoodDbHelper.getWritableDatabase();
         long rowId;
         switch (sUriMatcher.match(uri)) {
-            case URI_SHOP:
+            case URI_UNEXPECTED_SHOP:
                 /**
                  * insert row
                  */
-                rowId = db.insert(FoodDatabase.TABLE_SHOP, null, values);
+                rowId = db.insert(FoodDatabase.TABLE_UNEXPECTED_SHOP, null, values);
                 getContext().getContentResolver().notifyChange(uri, null);
                 break;
             default:
@@ -73,11 +73,11 @@ public class FoodDbProvider extends ContentProvider {
         SQLiteDatabase db = mFoodDbHelper.getWritableDatabase();
         int rowNums = 0;
         switch (sUriMatcher.match(uri)){
-            case URI_SHOP:
+            case URI_UNEXPECTED_SHOP:
                 /**
                  *
                  */
-                rowNums = db.delete(FoodDatabase.TABLE_SHOP, selection, selectionArgs);
+                rowNums = db.delete(FoodDatabase.TABLE_UNEXPECTED_SHOP, selection, selectionArgs);
                 getContext().getContentResolver().notifyChange(uri, null);
                 break;
             default:

@@ -1,148 +1,150 @@
 package com.mi.FoodChoice.ui;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
-import android.util.TypedValue;
-import android.widget.ImageView;
+import android.view.MotionEvent;
+import android.view.View;
+
 import com.mi.FoodChoice.R;
 
-public class CircleButton extends ImageView {
+public class CircleButton extends View {
 
-    private static final int PRESSED_COLOR_LIGHTUP = 255 / 25;
-    private static final int PRESSED_RING_ALPHA = 75;
-    private static final int DEFAULT_PRESSED_RING_WIDTH_DIP = 4;
-    private static final int ANIMATION_TIME_ID = android.R.integer.config_shortAnimTime;
+    private static final float SHADOW_RADIUS = 30.0f;
+    private static final float SHADOW_OFFSET_X = 0.0f;
+    private static final float SHADOW_OFFSET_Y = 3.0f;
 
-    private int centerY;
-    private int centerX;
-    private int outerRadius;
-    private int pressedRingRadius;
+    private int mButtonWidth;
+    private int mButtonHeight;
+    private int mColor;
+    private Bitmap mIcon;
+    private Rect mFingerRect;
+    private boolean mMoveOutside;
 
-    private Paint circlePaint;
-    private Paint focusPaint;
-
-    private float animationProgress;
-
-    private int pressedRingWidth;
-    private int defaultColor = Color.BLACK;
-    private int pressedColor;
-    private ObjectAnimator pressedAnimator;
+    private Paint circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint iconPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     public CircleButton(Context context) {
-        super(context);
-        init(context, null);
+        this(context, null);
     }
 
     public CircleButton(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context, attrs);
+        this(context, attrs, 0);
     }
 
-    public CircleButton(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init(context, attrs);
-    }
-
-    @Override
-    public void setPressed(boolean pressed) {
-        super.setPressed(pressed);
-
-        if (circlePaint != null) {
-            circlePaint.setColor(pressed ? pressedColor : defaultColor);
+    public CircleButton(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        mButtonWidth = getResources().getDimensionPixelSize(R.dimen.circle_button_width);
+        mButtonHeight = getResources().getDimensionPixelSize(R.dimen.circle_button_height);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.CircleButton);
+        mColor = attributes.getColor(R.styleable.CircleButton_circle_color,
+                getResources().getColor(R.color.circle_button_color));
+        float shadowRadius = attributes
+                .getFloat(R.styleable.CircleButton_circle_shadow_radius, SHADOW_RADIUS);
+        float shadowOffsetX = attributes
+                .getFloat(R.styleable.CircleButton_circle_shadow_offset_x, SHADOW_OFFSET_X);
+        float shadowOffsetY = attributes
+                .getFloat(R.styleable.CircleButton_circle_shadow_offset_y, SHADOW_OFFSET_Y);
+        int shadowColor = attributes.getColor(R.styleable.CircleButton_circle_shadow_color,
+                getResources().getColor(R.color.circle_button_shadow_color));
+        Drawable drawable = attributes.getDrawable(R.styleable.CircleButton_circle_icon);
+        if (drawable != null) {
+            mIcon = ((BitmapDrawable) drawable).getBitmap();
         }
-
-        if (pressed) {
-            showPressedRing();
-        } else {
-            hidePressedRing();
-        }
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        canvas.drawCircle(centerX, centerY, pressedRingRadius + animationProgress, focusPaint);
-        canvas.drawCircle(centerX, centerY, outerRadius - pressedRingWidth, circlePaint);
-        super.onDraw(canvas);
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        centerX = w / 2;
-        centerY = h / 2;
-        outerRadius = Math.min(w, h) / 2;
-        pressedRingRadius = outerRadius - pressedRingWidth - pressedRingWidth / 2;
-    }
-
-    public float getAnimationProgress() {
-        return animationProgress;
-    }
-
-    public void setAnimationProgress(float animationProgress) {
-        this.animationProgress = animationProgress;
-        this.invalidate();
-    }
-
-    public void setColor(int color) {
-        this.defaultColor = color;
-        this.pressedColor = getHighlightColor(color, PRESSED_COLOR_LIGHTUP);
-
-        circlePaint.setColor(defaultColor);
-        focusPaint.setColor(defaultColor);
-        focusPaint.setAlpha(PRESSED_RING_ALPHA);
-
-        this.invalidate();
-    }
-
-    private void hidePressedRing() {
-        pressedAnimator.setFloatValues(pressedRingWidth, 0f);
-        pressedAnimator.start();
-    }
-
-    private void showPressedRing() {
-        pressedAnimator.setFloatValues(animationProgress, pressedRingWidth);
-        pressedAnimator.start();
-    }
-
-    private void init(Context context, AttributeSet attrs) {
-        this.setFocusable(true);
-        this.setScaleType(ScaleType.CENTER_INSIDE);
-        setClickable(true);
-
-        circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        attributes.recycle();
+        circlePaint.setColor(mColor);
         circlePaint.setStyle(Paint.Style.FILL);
-
-        focusPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        focusPaint.setStyle(Paint.Style.STROKE);
-
-        pressedRingWidth = (int) TypedValue
-                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_PRESSED_RING_WIDTH_DIP,
-                        getResources()
-                                .getDisplayMetrics());
-
-        int color = Color.BLACK;
-        if (attrs != null) {
-            final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleButton);
-            color = a.getColor(R.styleable.CircleButton_cb_color, color);
-            pressedRingWidth = (int) a.getDimension(R.styleable.CircleButton_cb_pressedRingWidth, pressedRingWidth);
-            a.recycle();
+        circlePaint.setShadowLayer(shadowRadius, shadowOffsetX, shadowOffsetY, shadowColor);
+        setWillNotDraw(false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
-
-        setColor(color);
-
-        focusPaint.setStrokeWidth(pressedRingWidth);
-        final int pressedAnimationTime = getResources().getInteger(ANIMATION_TIME_ID);
-        pressedAnimator = ObjectAnimator.ofFloat(this, "animationProgress", 0f, 0f);
-        pressedAnimator.setDuration(pressedAnimationTime);
     }
 
-    private int getHighlightColor(int color, int amount) {
-        return Color.argb(Math.min(255, Color.alpha(color)), Math.min(255, Color.red(color) + amount),
-                Math.min(255, Color.green(color) + amount), Math.min(255, Color.blue(color) + amount));
+    private int darkenColor(int color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+        hsv[1] *= 0.85f;
+        return Color.HSVToColor(hsv);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int size;
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+        if (widthSpecMode == MeasureSpec.EXACTLY) {
+            if (widthSpecSize < mButtonWidth) {
+                size = mButtonWidth;
+            } else {
+                size = widthSpecSize;
+            }
+        } else {
+            size = mButtonWidth;
+        }
+        widthMeasureSpec = MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY);
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+        if (heightSpecMode == MeasureSpec.EXACTLY) {
+            if (heightSpecSize < mButtonHeight) {
+                size = mButtonHeight;
+            } else {
+                size = heightSpecSize;
+            }
+        } else {
+            size = mButtonHeight;
+        }
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mMoveOutside = false;
+                mFingerRect = new Rect(getLeft(), getTop(), getRight(), getBottom());
+                circlePaint.setColor(darkenColor(mColor));
+                invalidate();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (!mFingerRect.contains(getLeft() + (int) event.getX(),
+                        getTop() + (int) event.getY())) {
+                    mMoveOutside = true;
+                    circlePaint.setColor(mColor);
+                    invalidate();
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                circlePaint.setColor(mColor);
+                invalidate();
+                if (!mMoveOutside) {
+                    performClick();
+                }
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                circlePaint.setColor(mColor);
+                invalidate();
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    protected void onDraw(@NonNull Canvas canvas) {
+        super.onDraw(canvas);
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, (float) (getWidth() / 2.6), circlePaint);
+        if (mIcon != null) {
+            int leftPadding = (int)(getWidth() / 2.8);
+            int topPadding = (int) (getHeight() / 2.8);
+            Rect rect = new Rect(leftPadding, topPadding, getWidth() - leftPadding,
+                    getHeight() - topPadding);
+            canvas.drawBitmap(mIcon, null, rect, iconPaint);
+        }
     }
 }

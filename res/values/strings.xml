@@ -10,21 +10,6 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
-    <!-- menu -->
-    <string name="action_bar_add">Add Happiness</string>
 
-    <!-- shop edit-->
-    <string name="shop_edit_name_tip">Shop name :</string>
-    <string name="shop_edit_spinner_taste_prompt">Choose a taste :</string>
-    <string name="shop_edit_dialog_add_shop_title">Add a shop</string>
-    <string name="shop_edit_ok_btn">OK</string>
-    <string name="shop_edit_no_btn">No</string>
-    <string name="shop_edit_text_empty_toast">Empty content is not allowed</string>
-
-    <!-- taste array-->
-    <string name="taste_chuancai">Sichuan cuisine</string>
-    <string name="taste_hunan">Hunan cuisine</string>
-    <string name="taste_dongbei">Dongbei cuisine</string>
-    <string name="taste_zonghe">Zonghe cuisine</string>
 
 </resources>
