@@ -3,6 +3,7 @@ package com.mi.FoodChoice.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Shop implements Parcelable{
@@ -19,10 +20,9 @@ public class Shop implements Parcelable{
     private String business_url;
     private int has_deal;
     private int deal_count;
-    private List<ShopDeal> deals;
+    private ArrayList<ShopDeal> deals;
 
-    public Shop() {
-    }
+    public Shop() {}
 
     public int getBusiness_id() {
         return business_id;
@@ -164,11 +164,11 @@ public class Shop implements Parcelable{
         this.deal_count = deal_count;
     }
 
-    public List<ShopDeal> getDeals() {
+    public ArrayList<ShopDeal> getDeals() {
         return deals;
     }
 
-    public void setDeals(List<ShopDeal> deals) {
+    public void setDeals(ArrayList<ShopDeal> deals) {
         this.deals = deals;
     }
 }

@@ -55,6 +55,7 @@ public class CircleButton extends View {
         Drawable drawable = attributes.getDrawable(R.styleable.CircleButton_circle_icon);
         if (drawable != null) {
             mIcon = ((BitmapDrawable) drawable).getBitmap();
+
         }
         attributes.recycle();
         circlePaint.setColor(mColor);

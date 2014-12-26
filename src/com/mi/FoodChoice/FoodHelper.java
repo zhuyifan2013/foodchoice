@@ -5,6 +5,8 @@ import android.database.Cursor;
 import com.mi.FoodChoice.data.FoodDatabase;
 import com.mi.FoodChoice.data.Shop;
 import com.mi.FoodChoice.data.UnExpShop;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +17,14 @@ public class FoodHelper {
 
     private static List<UnExpShop> unexpectedShopList;
     private static List<Shop> shopList;
+
+    public static DisplayImageOptions DEFAULT_DISPLAY_OPTIONS = new DisplayImageOptions.Builder()
+            .showImageForEmptyUri(R.drawable.wtf)
+            .showImageOnLoading(R.drawable.wtf)
+            .showImageOnFail(R.drawable.wtf)
+            .cacheOnDisk(true)
+            .displayer(new SimpleBitmapDisplayer())
+            .build();
 
     static {
         unexpectedShopList = new ArrayList<UnExpShop>();

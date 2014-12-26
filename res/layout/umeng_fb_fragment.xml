@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:divider="@null"
-            android:transcriptMode="alwaysScroll"></ListView>
+            android:transcriptMode="alwaysScroll" />
 
     </com.umeng.fb.widget.InterceptTouchSwipeRefreshLayout>
 </RelativeLayout>

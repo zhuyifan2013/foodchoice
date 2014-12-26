@@ -21,7 +21,8 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Main.NoActionBar">
+            android:theme="@style/Theme.Main.NoActionBar"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -30,11 +31,27 @@
 
         <activity
             android:name=".SettingActivity"
-            android:parentActivityName=".HomeActivity"
+            android:theme="@style/Theme.Main"
+            android:parentActivityName=".HomeActivity"/>
+
+        <activity
+            android:name=".ShopDealsActivity"
+            android:theme="@style/Theme.Main"
+            android:parentActivityName=".HomeActivity"/>
+
+        <activity
+            android:name=".FeedbackActivity"
             android:theme="@style/Theme.Main"/>
 
         <activity
-            android:name="com.umeng.fb.ConversationActivity"/>
+            android:name=".LocationActivity"
+            android:theme="@style/Theme.Main"
+            android:parentActivityName=".HomeActivity"/>
+
+        <activity
+            android:name="com.umeng.fb.ConversationActivity"
+            android:theme="@style/Theme.Main"/>
+
         <meta-data android:value="54918bb7fd98c57eeb0001ab" android:name="UMENG_APPKEY"/>
         <meta-data android:value="Yifan" android:name="UMENG_CHANNEL"/>
 

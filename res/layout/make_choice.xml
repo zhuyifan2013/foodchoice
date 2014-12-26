@@ -111,6 +111,12 @@
                 android:gravity="center"
                 android:orientation="horizontal">
                 <com.mi.FoodChoice.ui.CircleButton
+                    android:id="@+id/location"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:circle_color="@color/accent_color"
+                    app:circle_icon="@drawable/location"/>
+                <com.mi.FoodChoice.ui.CircleButton
                     android:id="@+id/make_choice"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -141,35 +147,40 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/wtf"/>
-        <RelativeLayout
-            android:id="@+id/deals_list"
+
+        <LinearLayout
+            android:id="@+id/deals_list_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone">
-            <LinearLayout
-                android:id="@+id/deals_list_content"
-                android:layout_width="match_parent"
+            android:visibility="gone"
+            android:padding="20dp"
+            android:gravity="center_vertical"
+            android:clickable="false"
+            android:background="@drawable/list_item_bg">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="25dp"
+                android:clickable="false"
+                android:src="@drawable/cart"/>
+            <TextView
+                android:id="@+id/deals_list_title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:gravity="center_vertical">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="25dp"
-                    android:src="@drawable/cart"/>
-                <TextView
-                    android:id="@+id/deals_list_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/FoodTextAppearance.ListItemTitle"
-                    android:text="@string/shop_deals_item_title"/>
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_below="@+id/deals_list_content"
-                android:background="#b6b6b6"/>
-        </RelativeLayout>
+                android:clickable="false"
+                android:textAppearance="@style/FoodTextAppearance.ListItem.Title"
+                android:text="@string/shop_deals_item_title"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:src="@drawable/dianping"
+            android:layout_marginBottom="5dp"/>
 
     </LinearLayout>
 

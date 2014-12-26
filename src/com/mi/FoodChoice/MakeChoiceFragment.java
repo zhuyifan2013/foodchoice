@@ -1,20 +1,15 @@
 package com.mi.FoodChoice;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,28 +19,24 @@ import com.mi.FoodChoice.Handler.DianPingHandler;
 import com.mi.FoodChoice.data.*;
 import com.mi.FoodChoice.ui.CircleButton;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
-public class MakeChoiceFragment extends Fragment implements LocationListener, View.OnClickListener {
+public class MakeChoiceFragment extends Fragment implements View.OnClickListener {
 
-    private CircleButton mChocieBtn, mFirstBtn, mTrashBtn;
+    private CircleButton mChocieBtn, mFirstBtn, mTrashBtn, mLocationBtn;
     private ImageButton mSettingBtn;
     private ImageView mLatterEmpty;
     private TextView mShopName, mShopPrice, mShopDistance, mDealListTitle;
     private LinearLayout mShopDetailsLayout;
-    private RelativeLayout mDealsListLayout;
+    private LinearLayout mDealsListLayout;
 
     private LocationManager mLocationManager;
-    private Location mLocation;
+    private Location mLocation ;
     private Gson mGson;
 
     private int mChoiceCount = 0;
 
     private Shop mChoiceShop;
-    private Fragment mSettingFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,13 +54,14 @@ public class MakeChoiceFragment extends Fragment implements LocationListener, Vi
         mTrashBtn = (CircleButton) view.findViewById(R.id.trash);
         mChocieBtn = (CircleButton) view.findViewById(R.id.make_choice);
         mFirstBtn = (CircleButton) view.findViewById(R.id.first_click);
+        mLocationBtn = (CircleButton) view.findViewById(R.id.location);
         mSettingBtn = (ImageButton) view.findViewById(R.id.setting);
         mLatterEmpty = (ImageView) view.findViewById(R.id.latter_empty);
         mShopName = (TextView) view.findViewById(R.id.shop_name);
         mShopPrice = (TextView) view.findViewById(R.id.shop_price);
         mShopDistance = (TextView) view.findViewById(R.id.shop_distance);
         mDealListTitle = (TextView) view.findViewById(R.id.deals_list_title);
-        mDealsListLayout = (RelativeLayout) view.findViewById(R.id.deals_list);
+        mDealsListLayout = (LinearLayout) view.findViewById(R.id.deals_list_item);
         mShopDetailsLayout = (LinearLayout) view.findViewById(R.id.shop_details);
         return view;
     }
@@ -81,6 +73,8 @@ public class MakeChoiceFragment extends Fragment implements LocationListener, Vi
         mFirstBtn.setOnClickListener(this);
         mSettingBtn.setOnClickListener(this);
         mTrashBtn.setOnClickListener(this);
+        mLocationBtn.setOnClickListener(this);
+        mDealsListLayout.setOnClickListener(this);
     }
 
     @Override
@@ -88,7 +82,8 @@ public class MakeChoiceFragment extends Fragment implements LocationListener, Vi
         super.onResume();
         String gpsLocationProvider = LocationManager.GPS_PROVIDER;
         String networkLocationProvider = LocationManager.NETWORK_PROVIDER;
-        mLocationManager.requestLocationUpdates(gpsLocationProvider, 1000, 0, this);
+        mLocationManager.requestLocationUpdates(networkLocationProvider, 1000, 1, netWorkListener);
+        mLocationManager.requestLocationUpdates(gpsLocationProvider, 1000, 1, gpsListener);
         mLocation = mLocationManager.getLastKnownLocation(gpsLocationProvider);
         if (mLocation == null) {
             mLocation = mLocationManager.getLastKnownLocation(networkLocationProvider);
@@ -97,7 +92,8 @@ public class MakeChoiceFragment extends Fragment implements LocationListener, Vi
 
     @Override
     public void onStop() {
-        mLocationManager.removeUpdates(this);
+        mLocationManager.removeUpdates(netWorkListener);
+        mLocationManager.removeUpdates(gpsListener);
         saveData();
         super.onStop();
     }
@@ -113,6 +109,7 @@ public class MakeChoiceFragment extends Fragment implements LocationListener, Vi
                     mShopDistance.setText(String.format(getString(R.string.shop_distance),
                             Float.toString(mChoiceShop.getDistance())));
                     if (mChoiceShop.getHas_deal() == 1) {
+                        mDealsListLayout.setClickable(true);
                         mDealListTitle.setText(
                                 String.format(getString(R.string.shop_deals_item_title),
                                         Integer.toString(mChoiceShop.getDeal_count())));
@@ -133,30 +130,65 @@ public class MakeChoiceFragment extends Fragment implements LocationListener, Vi
                     showToast("没有合适的商家了");
                     break;
                 }
+
+                case Constants.MSG_LOCATION_SEARCHED: {
+                    showToast("找到位置啦!");
+                    break;
+                }
             }
             super.handleMessage(msg);
         }
     };
 
-    @Override
-    public void onLocationChanged(Location location) {
-        mLocation = location;
-    }
+    private LocationListener netWorkListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            Message msg = new Message();
+            mLocation = location;
+            msg.what = Constants.MSG_LOCATION_SEARCHED;
+            mHandler.sendMessage(msg);
+        }
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
 
-    }
+        }
 
-    @Override
-    public void onProviderEnabled(String provider) {
+        @Override
+        public void onProviderEnabled(String provider) {
 
-    }
+        }
 
-    @Override
-    public void onProviderDisabled(String provider) {
+        @Override
+        public void onProviderDisabled(String provider) {
 
-    }
+        }
+    };
+
+    private LocationListener gpsListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            Message msg = new Message();
+            mLocation = location;
+            msg.what = Constants.MSG_LOCATION_SEARCHED;
+            mHandler.sendMessage(msg);
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 
     private void showToast(CharSequence msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
@@ -170,10 +202,15 @@ public class MakeChoiceFragment extends Fragment implements LocationListener, Vi
     public void onClick(View v) {
         int viewId = v.getId();
         switch (viewId) {
+
+            // shuffle from shop list
             case R.id.make_choice: {
+                mDealsListLayout.setClickable(false);
                 makeChoice();
                 break;
             }
+
+            // put this shop into unexpected shop list
             case R.id.trash:
                 UnExpShop unExpShop = new UnExpShop();
                 unExpShop.setBusinessId(mChoiceShop.getBusiness_id());
@@ -197,15 +234,28 @@ public class MakeChoiceFragment extends Fragment implements LocationListener, Vi
                 makeChoice();
                 break;
 
+            // big button
             case R.id.first_click: {
+                mDealsListLayout.setClickable(false);
                 mChoiceCount++;
                 showToast(getString(R.string.toast_first));
                 searchNearShop();
                 break;
             }
+
             case R.id.setting:
                 startActivity((new Intent()).setClass(getActivity(), SettingActivity.class));
                 break;
+
+            case R.id.deals_list_item:
+                Intent intent = new Intent();
+                intent.putParcelableArrayListExtra(Constants.KEY_DEALS, mChoiceShop.getDeals());
+                intent.setClass(getActivity(), ShopDealsActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.location:
+
         }
     }
 
@@ -221,7 +271,7 @@ public class MakeChoiceFragment extends Fragment implements LocationListener, Vi
                 break;
             default:
                 showToast(getString(R.string.toast_more));
-                return;
+                break;
         }
 
         if (FoodHelper.getShopList() != null && !FoodHelper.getShopList().isEmpty()) {

@@ -25,4 +25,7 @@
     <string name="setting_unexpected_shop_list_title">不再出现的美食店</string>
     <string name="setting_feedback">建议反馈</string>
 
+    <string name="deal_current_price">现价:<xliff:g id="current_price">%1$s</xliff:g></string>
+    <string name="deal_origin_price">原价：<xliff:g id="origin_price">%1$s</xliff:g></string>
+
 </resources>

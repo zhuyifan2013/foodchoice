@@ -12,9 +12,14 @@ public class Constants {
 
     public static final int SETTING = 1;
 
+
+    //key
+
     public static final String SHOP_ITEM = "shop_item";
 
     public static final String KEY_SHOP = "shop";
+
+    public static final String KEY_DEALS = "deals";
 
     //dialog action id
     public  static final String ACTION_ID = "action_id";
@@ -36,6 +41,10 @@ public class Constants {
     public static final int MSG_CHOICE_FINISH = 2;
 
     public static final int MSG_NO_SUITABLE_SHOP = 3;
+
+    public static final int MSG_SEARCH_FINISH = 4;
+
+    public static final int MSG_LOCATION_SEARCHED = 5;
 
     //Date Format
     public static final String DATE_PATTEN_1 = "yyyy-MM-dd";

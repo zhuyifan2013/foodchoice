@@ -3,6 +3,7 @@
     <style name="Theme.Main" parent="android:Theme.Holo.Light">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:actionBarStyle">@style/ActionBarTitle</item>
     </style>
 
     <style name="Theme.Main.NoActionBar">
