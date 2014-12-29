@@ -21,6 +21,8 @@ public class Constants {
 
     public static final String KEY_DEALS = "deals";
 
+    public static final String KEY_BAIDU_URI = "baidu_uri";
+
     //dialog action id
     public  static final String ACTION_ID = "action_id";
 

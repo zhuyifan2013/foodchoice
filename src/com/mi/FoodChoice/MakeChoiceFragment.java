@@ -200,6 +200,7 @@ public class MakeChoiceFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         int viewId = v.getId();
         switch (viewId) {
 
@@ -248,13 +249,21 @@ public class MakeChoiceFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.deals_list_item:
-                Intent intent = new Intent();
+                intent = new Intent();
                 intent.putParcelableArrayListExtra(Constants.KEY_DEALS, mChoiceShop.getDeals());
                 intent.setClass(getActivity(), ShopDealsActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.location:
+                String realUrl = FoodHelper.BAIDU_URI + "location=" + mChoiceShop.getLatitude() + ","
+                        + mChoiceShop.getLongitude() + "&title=商铺位置&content="
+                        + mChoiceShop.getName() + "&output=html";
+                intent = new Intent();
+                intent.putExtra(Constants.KEY_BAIDU_URI, realUrl);
+                intent.setClass(getActivity(), LocationActivity.class);
+                startActivity(intent);
+
 
         }
     }

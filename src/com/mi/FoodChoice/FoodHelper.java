@@ -15,6 +15,8 @@ import java.util.List;
 
 public class FoodHelper {
 
+    public static String BAIDU_URI = "http://api.map.baidu.com/marker?";
+
     private static List<UnExpShop> unexpectedShopList;
     private static List<Shop> shopList;
 
@@ -47,7 +49,7 @@ public class FoodHelper {
         FoodHelper.shopList = shopList;
     }
 
-    public static void initUnExpectShopIdList(Context context){
+    public static void initUnExpectShopIdList(Context context) {
         Cursor cursor = null;
         try {
             cursor = context.getContentResolver()
@@ -62,13 +64,13 @@ public class FoodHelper {
                 unexpectedShopList.add(unExpShop);
             }
         } finally {
-            if(cursor != null) {
+            if (cursor != null) {
                 cursor.close();
             }
         }
     }
 
-    public static String getDateString(long milliTime, String patten){
+    public static String getDateString(long milliTime, String patten) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(patten);
         return simpleDateFormat.format(new Date(milliTime));
     }
