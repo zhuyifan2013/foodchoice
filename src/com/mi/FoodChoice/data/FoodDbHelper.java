@@ -8,12 +8,9 @@ public class FoodDbHelper extends SQLiteOpenHelper {
 
     private final static int DB_VERSION = 1;
     private final static String DB_NAME = "food.db";
-    private final String FILE_BUILT_IN = "built_in_shop";
-    private static Context mContext;
 
     public FoodDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        mContext = context;
     }
 
     @Override

@@ -31,7 +31,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/setting"/>
+            android:background="@drawable/more_info"/>
     </LinearLayout>
 
     <LinearLayout
@@ -55,7 +55,8 @@
             android:id="@+id/shop_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
             <TextView
                 android:id="@+id/shop_name"
                 android:layout_width="match_parent"
@@ -111,7 +112,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
                 <com.mi.FoodChoice.ui.CircleButton
-                    android:id="@+id/location"
+                    android:id="@+id/content"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     app:circle_color="@color/accent_color"

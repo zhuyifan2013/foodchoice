@@ -2,6 +2,8 @@ package com.mi.FoodChoice;
 
 import android.app.ListFragment;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.google.gson.Gson;
 import com.mi.FoodChoice.Handler.DianPingHandler;
@@ -79,6 +82,13 @@ public class ShopDealsFragment extends ListFragment {
             super.handleMessage(msg);
         }
     };
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+        intent.putExtra(Constants.KEY_URI, mShopDealList.get(position).getDeal_h5_url());
+        startActivity(intent);
+    }
 
     private class MyAdapter extends ArrayAdapter<ShopDeal> {
 

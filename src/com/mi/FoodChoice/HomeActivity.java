@@ -2,10 +2,8 @@ package com.mi.FoodChoice;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import com.mi.FoodChoice.data.Constants;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.umeng.analytics.MobclickAgent;
 
@@ -35,7 +33,7 @@ public class HomeActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.setting:
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new SettingFragment()).commit();
+                        .replace(R.id.content_frame, new MoreInfoFragment()).commit();
         }
         return super.onOptionsItemSelected(item);
     }

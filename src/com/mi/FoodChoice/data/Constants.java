@@ -7,11 +7,8 @@ public class Constants {
 
     public static final String APP_SECRET = "fd89998529e8442097da4a5f0af3529a";
 
-
-    public static final int MAKE_CHOICE = 0;
-
-    public static final int SETTING = 1;
-
+    //Event id
+    public static final String EVENT_CLICK_PER_LANCH = "make_choice_per_lanch";
 
     //key
 
@@ -21,7 +18,7 @@ public class Constants {
 
     public static final String KEY_DEALS = "deals";
 
-    public static final String KEY_BAIDU_URI = "baidu_uri";
+    public static final String KEY_URI = "baidu_uri";
 
     //dialog action id
     public  static final String ACTION_ID = "action_id";

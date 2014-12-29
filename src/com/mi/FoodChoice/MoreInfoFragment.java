@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.fb.fragment.FeedbackFragment;
 
-public class SettingFragment extends Fragment implements View.OnClickListener {
+public class MoreInfoFragment extends Fragment implements View.OnClickListener {
 
     private LinearLayout mUnExpShopLayout, mFeedback;
 

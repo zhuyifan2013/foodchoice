@@ -11,7 +11,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="ANDROID.PERMISSION.INSTALL_LOCATION_PROVIDER" />
+    <uses-permission android:name="ANDROID.PERMISSION.INSTALL_LOCATION_PROVIDER"/>
+    <!-- 这个权限用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!-- SD卡读取权限，用户写入离线定位数据-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <!--允许应用读取低级别的系统日志文件 -->
+    <uses-permission android:name="android.permission.READ_LOGS"/>
 
     <application
         android:name=".FoodApplication"
@@ -23,7 +31,8 @@
             android:name=".HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Main.NoActionBar"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -31,35 +40,51 @@
         </activity>
 
         <activity
-            android:name=".SettingActivity"
+            android:name=".MoreInfoActivity"
             android:theme="@style/Theme.Main"
-            android:parentActivityName=".HomeActivity"/>
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ShopDealsActivity"
             android:theme="@style/Theme.Main"
-            android:parentActivityName=".HomeActivity"/>
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".FeedbackActivity"
-            android:theme="@style/Theme.Main"/>
+            android:theme="@style/Theme.Main"
+            android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".LocationActivity"
+            android:name=".WebViewActivity"
             android:theme="@style/Theme.Main"
-            android:parentActivityName=".HomeActivity"/>
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name="com.umeng.fb.ConversationActivity"
-            android:theme="@style/Theme.Main"/>
+            android:theme="@style/Theme.Main"
+            android:screenOrientation="portrait"/>
 
-        <meta-data android:value="54918bb7fd98c57eeb0001ab" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="Yifan" android:name="UMENG_CHANNEL"/>
+        <!-- 友盟 -->
+        <meta-data
+            android:value="54918bb7fd98c57eeb0001ab"
+            android:name="UMENG_APPKEY"/>
+        <meta-data
+            android:value="Yifan"
+            android:name="UMENG_CHANNEL"/>
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="2924e576bb6646bbe80cce8e9aad316a" />
 
         <provider
             android:name="com.mi.FoodChoice.data.FoodDbProvider"
             android:authorities="com.mi.foodchoice"
             android:exported="false"/>
+
+
     </application>
 
 </manifest>

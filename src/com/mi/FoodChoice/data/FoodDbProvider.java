@@ -38,7 +38,8 @@ public class FoodDbProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case URI_UNEXPECTED_SHOP:
                 projection = FoodDatabase.PROJECTION_UNEXPECTED_SHOP;
-                cursor = db.query(FoodDatabase.TABLE_UNEXPECTED_SHOP, projection, selection, selectionArgs,
+                cursor = db.query(FoodDatabase.TABLE_UNEXPECTED_SHOP, projection, selection,
+                        selectionArgs,
                         null, null, sortOrder);
                 break;
         }
@@ -72,7 +73,7 @@ public class FoodDbProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         SQLiteDatabase db = mFoodDbHelper.getWritableDatabase();
         int rowNums = 0;
-        switch (sUriMatcher.match(uri)){
+        switch (sUriMatcher.match(uri)) {
             case URI_UNEXPECTED_SHOP:
                 /**
                  *
@@ -88,6 +89,16 @@ public class FoodDbProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return 0;
+        SQLiteDatabase db = mFoodDbHelper.getWritableDatabase();
+        int rowNums = 0;
+        switch (sUriMatcher.match(uri)) {
+            case URI_UNEXPECTED_SHOP:
+                rowNums = db.update(FoodDatabase.TABLE_UNEXPECTED_SHOP, values, selection,
+                        selectionArgs);
+                break;
+            default:
+                rowNums = 0;
+        }
+        return rowNums;
     }
 }

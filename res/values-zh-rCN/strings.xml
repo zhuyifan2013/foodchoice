@@ -14,10 +14,12 @@
     <!-- drawer string array -->
 
     <string name="shop_no">不喜欢</string>
-    <string name="toast_first">哒哒哒!好吃的来啦</string>
-    <string name="toast_secondary">没事,再来一次</string>
-    <string name="toast_third">说好的,最后一次</string>
-    <string name="toast_more">嗯?你刚干什么了?</string>
+    <string name="toast_three_times">事不过三,就选这家了吧!</string>
+    <string name="toast_six_times">六哇六,六哇六</string>
+    <string name="toast_ten_times">你赢了!尽情点击吧!</string>
+    <string name="toast_no_network">无法获取您当前位置，请联网后重试</string>
+    <string name="toast_no_suitable_shop">没有合适的商家了</string>
+    <string name="toast_remove_shop">已弃之!</string>
 
     <!-- setting -->
     <string name="setting_title">设置</string>
@@ -27,5 +29,12 @@
 
     <string name="deal_current_price">现价:<xliff:g id="current_price">%1$s</xliff:g></string>
     <string name="deal_origin_price">原价：<xliff:g id="origin_price">%1$s</xliff:g></string>
+
+    <string name="unexpected_empty_text">您还没舍弃过美食店</string>
+
+    <string name="latter_author_info">Coded by Yifan, Inspired by Lina</string>
+
+    <string name="dialog_title_revert">恢复</string>
+    <string name="dialog_message_revert">确定将此美食店恢复到待选列表中?</string>
 
 </resources>

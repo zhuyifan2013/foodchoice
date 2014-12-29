@@ -1,12 +1,15 @@
 package com.mi.FoodChoice;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import com.mi.FoodChoice.data.FoodDatabase;
 import com.mi.FoodChoice.data.Shop;
 import com.mi.FoodChoice.data.UnExpShop;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,7 +18,7 @@ import java.util.List;
 
 public class FoodHelper {
 
-    public static String BAIDU_URI = "http://api.map.baidu.com/marker?";
+    public static String GAODE_URI = "http://mo.amap.com/?";
 
     private static List<UnExpShop> unexpectedShopList;
     private static List<Shop> shopList;
@@ -25,7 +28,7 @@ public class FoodHelper {
             .showImageOnLoading(R.drawable.wtf)
             .showImageOnFail(R.drawable.wtf)
             .cacheOnDisk(true)
-            .displayer(new SimpleBitmapDisplayer())
+            .displayer(new FadeInBitmapDisplayer(500))
             .build();
 
     static {
@@ -57,11 +60,17 @@ public class FoodHelper {
                             null);
             while (cursor.moveToNext()) {
                 UnExpShop unExpShop = new UnExpShop();
-                unExpShop.setBusinessId(cursor.getInt(cursor.getColumnIndex(FoodDatabase.UnexpectedShop.BUSINESS_ID)));
-                unExpShop.setShopName(cursor.getString(cursor.getColumnIndex(FoodDatabase.UnexpectedShop.SHOP_NAME)));
-                unExpShop.setAddDate(cursor.getLong(cursor.getColumnIndex(FoodDatabase.UnexpectedShop.ADD_DATE)));
-                unExpShop.setIsExcluded(cursor.getInt(cursor.getColumnIndex(FoodDatabase.UnexpectedShop.IS_EXCLUDED)));
-                unexpectedShopList.add(unExpShop);
+                unExpShop.setBusinessId(cursor.getInt(
+                        cursor.getColumnIndex(FoodDatabase.UnexpectedShop.BUSINESS_ID)));
+                unExpShop.setShopName(cursor.getString(
+                        cursor.getColumnIndex(FoodDatabase.UnexpectedShop.SHOP_NAME)));
+                unExpShop.setAddDate(cursor.getLong(
+                        cursor.getColumnIndex(FoodDatabase.UnexpectedShop.ADD_DATE)));
+                unExpShop.setIsExcluded(cursor.getInt(
+                        cursor.getColumnIndex(FoodDatabase.UnexpectedShop.IS_EXCLUDED)));
+                if (unExpShop.getIsExcluded() == 1) {
+                    unexpectedShopList.add(unExpShop);
+                }
             }
         } finally {
             if (cursor != null) {
@@ -70,8 +79,26 @@ public class FoodHelper {
         }
     }
 
+    /**
+     * 根据patten对时间进行处理，返回相应的字符串
+     *
+     * @param milliTime 以毫秒为单位的时间值
+     * @param patten    处理形式
+     */
     public static String getDateString(long milliTime, String patten) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(patten);
         return simpleDateFormat.format(new Date(milliTime));
+    }
+
+    public static boolean isNetWorkConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager connectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null) {
+                return networkInfo.isAvailable();
+            }
+        }
+        return false;
     }
 }

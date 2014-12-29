@@ -13,9 +13,17 @@
         android:padding="18dp"
         android:background="@drawable/list_item_bg">
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/dislike"
+            android:clickable="false"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:clickable="false"
             android:text="@string/setting_unexpected_shop_list_title"
             android:textAppearance="@style/FoodTextAppearance.ListItem.Title"/>
@@ -28,25 +36,34 @@
         android:layout_height="wrap_content"
         android:padding="18dp"
         android:background="@drawable/list_item_bg">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/feedback"
+            android:clickable="false"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
+            android:layout_gravity="center_vertical"
             android:text="@string/setting_feedback"
             android:textAppearance="@style/FoodTextAppearance.ListItem.Title"/>
     </LinearLayout>
 
-    <LinearLayout
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="18dp"
-        android:background="@drawable/list_item_bg">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:text="@string/setting_about_title"
-            android:textAppearance="@style/FoodTextAppearance.ListItem.Title"/>
-    </LinearLayout>
-
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/latter_author_info"
+        android:textAppearance="@style/FoodTextAppearance.Small"/>
 </LinearLayout>
