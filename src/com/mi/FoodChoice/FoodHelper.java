@@ -14,6 +14,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class FoodHelper {
@@ -77,6 +78,15 @@ public class FoodHelper {
                 cursor.close();
             }
         }
+    }
+
+    public static UnExpShop getUnExpShopByBusinessId(int businessId) {
+        for (UnExpShop shop : unexpectedShopList) {
+            if (shop.getBusinessId() == businessId) {
+                return shop;
+            }
+        }
+        return null;
     }
 
     /**

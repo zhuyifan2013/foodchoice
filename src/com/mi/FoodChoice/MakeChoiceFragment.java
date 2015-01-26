@@ -29,7 +29,7 @@ import java.util.Random;
 public class MakeChoiceFragment extends Fragment implements View.OnClickListener,
         AMapLocationListener {
 
-    private CircleButton mChocieBtn, mFirstBtn, mTrashBtn, mLocationBtn;
+    private CircleButton mChocieBtn, mFirstBtn, mTrashBtn, mLocationBtn, mComment;
     private ImageButton mSettingBtn;
     private ImageView mLatterEmpty;
     private TextView mShopName, mShopPrice, mShopDistance, mDealListTitle;
@@ -65,7 +65,8 @@ public class MakeChoiceFragment extends Fragment implements View.OnClickListener
         mTrashBtn = (CircleButton) view.findViewById(R.id.trash);
         mChocieBtn = (CircleButton) view.findViewById(R.id.make_choice);
         mFirstBtn = (CircleButton) view.findViewById(R.id.first_click);
-        mLocationBtn = (CircleButton) view.findViewById(R.id.content);
+        mLocationBtn = (CircleButton) view.findViewById(R.id.location);
+        mComment = (CircleButton) view.findViewById(R.id.comment);
         mSettingBtn = (ImageButton) view.findViewById(R.id.setting);
         mLatterEmpty = (ImageView) view.findViewById(R.id.latter_empty);
         mShopName = (TextView) view.findViewById(R.id.shop_name);
@@ -86,6 +87,7 @@ public class MakeChoiceFragment extends Fragment implements View.OnClickListener
         mTrashBtn.setOnClickListener(this);
         mLocationBtn.setOnClickListener(this);
         mDealsListLayout.setOnClickListener(this);
+        mComment.setOnClickListener(this);
     }
 
     @Override
@@ -131,6 +133,15 @@ public class MakeChoiceFragment extends Fragment implements View.OnClickListener
                         mDealsListLayout.setVisibility(View.VISIBLE);
                         mShopDetailsLayout.setVisibility(View.VISIBLE);
                     }
+
+                    if (mChoiceShop.getReview_count() == 0) {
+                        mComment.setVisibility(View.GONE);
+                    } else {
+                        if (mComment.getVisibility() == View.GONE) {
+                            mComment.setVisibility(View.VISIBLE);
+                        }
+                    }
+
                     if (mFirstBtn.isShown() || mLatterEmpty.isShown()) {
                         mFirstBtn.setVisibility(View.GONE);
                         mLatterEmpty.setVisibility(View.GONE);
@@ -177,8 +188,12 @@ public class MakeChoiceFragment extends Fragment implements View.OnClickListener
                 break;
             }
 
-            // put this shop into unexpected shop list
+            // 将不想再出现的商店放在UnexpectedShopList中，从ShopList中剔除
             case R.id.trash:
+                if (FoodHelper.getShopList().isEmpty()) {
+                    showToast(getString(R.string.toast_no_suitable_shop));
+                    break;
+                }
                 UnExpShop unExpShop = new UnExpShop();
                 unExpShop.setBusinessId(mChoiceShop.getBusiness_id());
                 unExpShop.setShopName(mChoiceShop.getName());
@@ -199,7 +214,7 @@ public class MakeChoiceFragment extends Fragment implements View.OnClickListener
                                 .insert(FoodDatabase.UnexpectedShop.URI_UNEXPECTED_TABLE, values);
                     }
                 }).run();
-                showToast(getString(R.string.toast_remove_shop));
+                //showToast(getString(R.string.toast_remove_shop));
                 makeChoice();
                 break;
 
@@ -222,7 +237,7 @@ public class MakeChoiceFragment extends Fragment implements View.OnClickListener
                 startActivity(intent);
                 break;
 
-            case R.id.content:
+            case R.id.location:
                 String realUrl =
                         FoodHelper.GAODE_URI + "q=" + mChoiceShop.getLatitude() + ","
                                 + mChoiceShop.getLongitude() + "&name="
@@ -231,7 +246,13 @@ public class MakeChoiceFragment extends Fragment implements View.OnClickListener
                 intent.putExtra(Constants.KEY_URI, realUrl);
                 intent.setClass(getActivity(), WebViewActivity.class);
                 startActivity(intent);
-
+                break;
+            case R.id.comment:
+                intent = new Intent();
+                intent.putExtra(Constants.KEY_URI, mChoiceShop.getReview_list_url());
+                intent.setClass(getActivity(), WebViewActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -300,7 +321,8 @@ public class MakeChoiceFragment extends Fragment implements View.OnClickListener
         Shop choiceShop;
         for (Shop aShopList : shopList) {
             choiceShop = shopList.get((new Random()).nextInt(FoodHelper.getShopList().size()));
-            if (!FoodHelper.getUnexpectedShopList().contains(choiceShop.getBusiness_id())) {
+            if (!FoodHelper.getUnexpectedShopList().contains(FoodHelper.getUnExpShopByBusinessId(
+                    choiceShop.getBusiness_id()))) {
                 return choiceShop;
             }
         }

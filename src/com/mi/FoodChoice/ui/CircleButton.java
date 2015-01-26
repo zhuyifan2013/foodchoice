@@ -6,7 +6,6 @@ import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -105,7 +104,7 @@ public class CircleButton extends View {
     }
 
     @Override
-    public boolean onTouchEvent(@NonNull MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mMoveOutside = false;
@@ -137,11 +136,11 @@ public class CircleButton extends View {
     }
 
     @Override
-    protected void onDraw(@NonNull Canvas canvas) {
+    protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawCircle(getWidth() / 2, getHeight() / 2, (float) (getWidth() / 2.6), circlePaint);
         if (mIcon != null) {
-            int leftPadding = (int)(getWidth() / 2.8);
+            int leftPadding = (int) (getWidth() / 2.8);
             int topPadding = (int) (getHeight() / 2.8);
             Rect rect = new Rect(leftPadding, topPadding, getWidth() - leftPadding,
                     getHeight() - topPadding);

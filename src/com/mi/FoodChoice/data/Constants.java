@@ -20,6 +20,8 @@ public class Constants {
 
     public static final String KEY_URI = "baidu_uri";
 
+    public static final String KEY_COMMENT = "comment";
+
     //dialog action id
     public  static final String ACTION_ID = "action_id";
 

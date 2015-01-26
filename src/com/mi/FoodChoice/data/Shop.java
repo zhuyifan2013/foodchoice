@@ -21,6 +21,8 @@ public class Shop implements Parcelable{
     private int has_deal;
     private int deal_count;
     private ArrayList<ShopDeal> deals;
+    private String review_list_url;
+    private int review_count;
 
     public Shop() {}
 
@@ -106,6 +108,8 @@ public class Shop implements Parcelable{
         dest.writeInt(has_deal);
         dest.writeInt(deal_count);
         dest.writeList(deals);
+        dest.writeString(review_list_url);
+        dest.writeInt(review_count);
     }
 
     private Creator<Shop> CREATOR = new Creator<Shop>() {
@@ -123,6 +127,8 @@ public class Shop implements Parcelable{
             shop.setHas_deal(source.readInt());
             shop.setDeal_count(source.readInt());
             source.readList(shop.getDeals(),ShopDeal.class.getClassLoader());
+            shop.setReview_list_url(source.readString());
+            shop.setReview_count(source.readInt());
             return shop;
         }
 
@@ -170,5 +176,21 @@ public class Shop implements Parcelable{
 
     public void setDeals(ArrayList<ShopDeal> deals) {
         this.deals = deals;
+    }
+
+    public String getReview_list_url() {
+        return review_list_url;
+    }
+
+    public void setReview_list_url(String review_list_url) {
+        this.review_list_url = review_list_url;
+    }
+
+    public int getReview_count() {
+        return review_count;
+    }
+
+    public void setReview_count(int review_count) {
+        this.review_count = review_count;
     }
 }
