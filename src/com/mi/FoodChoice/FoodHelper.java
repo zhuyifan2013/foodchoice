@@ -1,10 +1,10 @@
 package com.mi.FoodChoice;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import com.mi.FoodChoice.data.FoodDatabase;
 import com.mi.FoodChoice.data.Shop;
 import com.mi.FoodChoice.data.UnExpShop;
@@ -14,10 +14,11 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class FoodHelper {
+
+    private static String TAG = "FoodHelper";
 
     public static String GAODE_URI = "http://mo.amap.com/?";
 
@@ -49,8 +50,47 @@ public class FoodHelper {
         return shopList;
     }
 
-    public static void setShopList(List<Shop> shopList) {
-        FoodHelper.shopList = shopList;
+    /**
+     * 扩展shop列表，取消了原有的setShopList方法，直接在现有元素的基础上增加元素
+     *
+     * @param shopList  待加入的list对象
+     * @param needCheck true：需要检查是否存在于unExp列表中，若存在则不添加;
+     *                  false：不检查
+     */
+    public static boolean extendShopList(List<Shop> shopList, boolean needCheck) {
+        for (Shop shop : shopList) {
+            if (!extendShopList(shop, needCheck)) {
+                Log.e(TAG, "error when adding shop list");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 扩展shop列表，取消了原有的setShopList方法，直接在现有元素的基础上增加元素
+     *
+     * @param shop      待加入的shop对象
+     * @param needCheck true：需要检查是否存在于unExp列表中，若存在则不添加;
+     *                  false：不检查
+     */
+    public static boolean extendShopList(Shop shop, boolean needCheck) {
+        if (shop == null) {
+            Log.e(TAG, "shop is null");
+            return false;
+        }
+        //若shopList中已有此对象,则不再添加
+        if (FoodHelper.shopList.contains(getShopByBusinessId(shop.getBusiness_id()))) {
+            return true;
+        }
+        if (!needCheck) {
+            FoodHelper.shopList.add(shop);
+        } else {
+            if (!unexpectedShopList.contains(getUnExpShopByBusinessId(shop.getBusiness_id()))) {
+                FoodHelper.shopList.add(shop);
+            }
+        }
+        return true;
     }
 
     public static void initUnExpectShopIdList(Context context) {
@@ -61,9 +101,9 @@ public class FoodHelper {
                             null);
             while (cursor.moveToNext()) {
                 UnExpShop unExpShop = new UnExpShop();
-                unExpShop.setBusinessId(cursor.getInt(
+                unExpShop.setBusiness_id(cursor.getInt(
                         cursor.getColumnIndex(FoodDatabase.UnexpectedShop.BUSINESS_ID)));
-                unExpShop.setShopName(cursor.getString(
+                unExpShop.setName(cursor.getString(
                         cursor.getColumnIndex(FoodDatabase.UnexpectedShop.SHOP_NAME)));
                 unExpShop.setAddDate(cursor.getLong(
                         cursor.getColumnIndex(FoodDatabase.UnexpectedShop.ADD_DATE)));
@@ -82,7 +122,16 @@ public class FoodHelper {
 
     public static UnExpShop getUnExpShopByBusinessId(int businessId) {
         for (UnExpShop shop : unexpectedShopList) {
-            if (shop.getBusinessId() == businessId) {
+            if (shop.getBusiness_id() == businessId) {
+                return shop;
+            }
+        }
+        return null;
+    }
+
+    public static Shop getShopByBusinessId(int businessId) {
+        for (Shop shop : shopList) {
+            if (shop.getBusiness_id() == businessId) {
                 return shop;
             }
         }

@@ -27,6 +27,16 @@
     <string name="umeng_fb_contact_key_email">email</string>
     <string name="umeng_fb_contact_key_phone">phone</string>
     <string name="umeng_fb_contact_key_other">plain</string>
+    <!-- 5.0.1 -->
+    <string name="umeng_fb_press_speech">Hold to Talk</string>
+    <string name="umeng_fb_release_send">Release to Send</string>
+    <string name="umeng_fb_release_cancel">Release to cancel</string>
+    <string name="umeng_fb_slide_up_cancel">Slide up to cancel</string>
+    <string name="umeng_fb_record_time_short">Message too short</string>
+    <string name="umeng_fb_count_down">Count down</string>
+    <string name="umeng_fb_record_fail">Record fail</string>
+    <string name="umeng_fb_no_record_permission">No permission of record</string>
+
 
     <string-array name="umeng_fb_contact_type_array">
         <item>@string/umeng_fb_contact_email</item>

@@ -1,37 +1,51 @@
 package com.mi.FoodChoice;
 
 import android.app.ActionBar;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.fragment.FeedbackFragment;
 
 public class FeedbackActivity extends FragmentActivity {
 
     private FeedbackFragment mFeedbackFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
         initSystemBar();
         initActionBar();
         setContentView(R.layout.feedback_activity);
         if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            String conversation_id = getIntent().getStringExtra(FeedbackFragment.BUNDLE_KEY_CONVERSATION_ID);
+            String conversation_id = getIntent()
+                    .getStringExtra(FeedbackFragment.BUNDLE_KEY_CONVERSATION_ID);
             mFeedbackFragment = FeedbackFragment.newInstance(conversation_id);
-
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.feedback_content,mFeedbackFragment)
+                    .add(R.id.feedback_content, mFeedbackFragment)
                     .commit();
         }
     }
 
     @Override
-    protected void onNewIntent(android.content.Intent intent) {
-        // mFeedbackFragment.addPushDevReply();
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
     }
+
+    @Override
+    protected void onPause() {
+        MobclickAgent.onPause(this);
+        super.onPause();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

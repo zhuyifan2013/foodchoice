@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.mi.FoodChoice"
-          android:versionCode="1"
-          android:versionName="0.1">
-    <uses-sdk android:minSdkVersion="16"/>
+          android:versionCode="2"
+          android:versionName="0.2">
+    <uses-sdk android:minSdkVersion="16"
+              android:targetSdkVersion="19"/>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -20,6 +21,8 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <!--允许应用读取低级别的系统日志文件 -->
     <uses-permission android:name="android.permission.READ_LOGS"/>
+    <!--友盟语音反馈-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <application
         android:name=".FoodApplication"
@@ -75,16 +78,15 @@
             android:value="Yifan"
             android:name="UMENG_CHANNEL"/>
 
+        <!-- 高德地图-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="2924e576bb6646bbe80cce8e9aad316a" />
+            android:value="2924e576bb6646bbe80cce8e9aad316a"/>
 
         <provider
             android:name="com.mi.FoodChoice.data.FoodDbProvider"
             android:authorities="com.mi.foodchoice"
             android:exported="false"/>
 
-
     </application>
-
 </manifest>

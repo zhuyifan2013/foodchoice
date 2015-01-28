@@ -1,24 +1,16 @@
-package com.mi.FoodChoice.data;
+package com.mi.FoodChoice.model;
+
+import com.mi.FoodChoice.data.Shop;
+import com.mi.FoodChoice.model.BaseResponse;
 
 import java.util.List;
 
-public class NearShopResponse {
+public class NearShopResponse extends BaseResponse{
 
-    private String status;
+
     private String total_count;
-    private String count;
+
     private List<Shop> businesses;
-
-    public NearShopResponse() {
-
-    }
-
-    public NearShopResponse(String status, String total_count, String count, List<Shop> businesses){
-        this.status = status;
-        this.total_count = total_count;
-        this.count = count;
-        this.businesses = businesses;
-    }
 
     public String getStatus() {
         return status;

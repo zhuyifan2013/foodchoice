@@ -8,4 +8,5 @@
     <!-- dialog dimen-->
     <dimen name="dialog_margin_top">20dp</dimen>
     <dimen name="dialog_padding">20dp</dimen>
+
 </resources>

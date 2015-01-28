@@ -27,6 +27,15 @@
     <string name="umeng_fb_contact_key_email">email</string>
     <string name="umeng_fb_contact_key_phone">phone</string>
     <string name="umeng_fb_contact_key_other">plain</string>
+    <!-- 5.0.1 -->
+    <string name="umeng_fb_press_speech">按住说话</string>
+    <string name="umeng_fb_release_send">松开发送</string>
+    <string name="umeng_fb_release_cancel">松开手指,取消发送</string>
+    <string name="umeng_fb_slide_up_cancel">向上滑动,取消发送</string>
+    <string name="umeng_fb_record_time_short">录音时间太短</string>
+    <string name="umeng_fb_count_down">限时倒数</string>
+    <string name="umeng_fb_record_fail">录音失败</string>
+    <string name="umeng_fb_no_record_permission">没有录音权限</string>
 
     <string-array name="umeng_fb_contact_type_array">
         <item>@string/umeng_fb_contact_email</item>

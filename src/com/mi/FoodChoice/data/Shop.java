@@ -8,21 +8,21 @@ import java.util.List;
 
 public class Shop implements Parcelable{
 
-    private int business_id;
-    private String name;
-    private String address;
-    private String telephone;
-    private float latitude;
-    private float longitude;
-    private float distance;
-    private int avg_price;
-    private String photo_url;
-    private String business_url;
-    private int has_deal;
-    private int deal_count;
-    private ArrayList<ShopDeal> deals;
-    private String review_list_url;
-    private int review_count;
+    protected int business_id;
+    protected String name;
+    protected String address;
+    protected String telephone;
+    protected float latitude;
+    protected float longitude;
+    protected float distance;
+    protected int avg_price;
+    protected String photo_url;
+    protected String business_url;
+    protected int has_deal;
+    protected int deal_count;
+    protected ArrayList<ShopDeal> deals;
+    protected String review_list_url;
+    protected int review_count;
 
     public Shop() {}
 

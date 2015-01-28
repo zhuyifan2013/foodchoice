@@ -14,7 +14,7 @@ import com.mi.FoodChoice.R;
 
 public class CircleButton extends View {
 
-    private static final float SHADOW_RADIUS = 30.0f;
+    private static final float SHADOW_RADIUS = 15.0f;
     private static final float SHADOW_OFFSET_X = 0.0f;
     private static final float SHADOW_OFFSET_Y = 3.0f;
 

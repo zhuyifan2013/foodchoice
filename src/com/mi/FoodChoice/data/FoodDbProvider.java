@@ -57,9 +57,6 @@ public class FoodDbProvider extends ContentProvider {
         long rowId;
         switch (sUriMatcher.match(uri)) {
             case URI_UNEXPECTED_SHOP:
-                /**
-                 * insert row
-                 */
                 rowId = db.insert(FoodDatabase.TABLE_UNEXPECTED_SHOP, null, values);
                 getContext().getContentResolver().notifyChange(uri, null);
                 break;
@@ -75,9 +72,6 @@ public class FoodDbProvider extends ContentProvider {
         int rowNums = 0;
         switch (sUriMatcher.match(uri)) {
             case URI_UNEXPECTED_SHOP:
-                /**
-                 *
-                 */
                 rowNums = db.delete(FoodDatabase.TABLE_UNEXPECTED_SHOP, selection, selectionArgs);
                 getContext().getContentResolver().notifyChange(uri, null);
                 break;

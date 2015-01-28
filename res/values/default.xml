@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!-- CircleButton Default -->
     <dimen name="circle_button_width">72dp</dimen>
     <dimen name="circle_button_height">72dp</dimen>
     <color name="circle_button_color">#ff3f51b5</color>
     <color name="circle_button_shadow_color">#55000000</color>
-
 </resources>

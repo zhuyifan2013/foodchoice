@@ -12,6 +12,10 @@ public class FoodDatabase {
             UnexpectedShop.IS_EXCLUDED, UnexpectedShop.ADD_DATE
     };
 
+    /**
+     * UnexpectedShop不存储Shop的其他属性是因为通过businessId可以查询到其他信息，这样能保证每次得到最新的信息
+     * v0.2及之前没有与unexpectedShop相关的操作
+     */
     public static class UnexpectedShop implements BaseColumns {
 
         public static final Uri URI_UNEXPECTED_TABLE = Uri
@@ -19,7 +23,7 @@ public class FoodDatabase {
 
         public static final String BUSINESS_ID = "business_id";
 
-        public static final String SHOP_NAME = "shop_name";
+        public static final String SHOP_NAME = "name";
 
         public static final String IS_EXCLUDED = "is_excluded";
 

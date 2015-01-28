@@ -5,7 +5,7 @@
 
     <include
         android:id="@+id/umeng_fb_contact_title"
-        layout="@layout/umeng_fb_reply_item" />
+        layout="@layout/umeng_fb_reply_item_text" />
 
     <ImageView
         android:id="@+id/umeng_fb_action_collapse"

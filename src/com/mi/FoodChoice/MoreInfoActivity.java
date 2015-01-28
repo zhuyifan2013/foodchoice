@@ -1,6 +1,7 @@
 package com.mi.FoodChoice;
 
 import android.os.Bundle;
+import com.umeng.analytics.MobclickAgent;
 
 public class MoreInfoActivity extends BaseActivity {
 
@@ -12,5 +13,15 @@ public class MoreInfoActivity extends BaseActivity {
                 .commit();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
 
+    @Override
+    protected void onPause() {
+        MobclickAgent.onPause(this);
+        super.onPause();
+    }
 }

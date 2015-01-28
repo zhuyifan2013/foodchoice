@@ -48,8 +48,49 @@
             app:circle_icon="@drawable/icecream"
             app:circle_color="@color/accent_color"
             android:textColor="#ffffff"
-            android:textAppearance="@style/FoodTextAppearance.Large"
-            android:text="食"/>
+            android:textAppearance="@style/FoodTextAppearance.Large"/>
+
+        <com.mi.FoodChoice.ui.ProgressWheel
+            android:id="@+id/location_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            app:matProg_barColor="@color/white"/>
+
+        <LinearLayout
+            android:id="@+id/no_shop"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sad"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/no_shop1"
+                android:textAppearance="@style/FoodTextAppearance.Medium"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/no_shop2"
+                android:textAppearance="@style/FoodTextAppearance.Medium"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/no_shop3"
+                android:textAppearance="@style/FoodTextAppearance.Medium"/>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/shop_details"
@@ -107,6 +148,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/actions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp"

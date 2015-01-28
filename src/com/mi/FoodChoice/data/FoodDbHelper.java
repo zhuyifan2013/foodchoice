@@ -18,6 +18,11 @@ public class FoodDbHelper extends SQLiteOpenHelper {
         createTable(db);
     }
 
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
     private void createTable(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " +
                 FoodDatabase.TABLE_UNEXPECTED_SHOP + "(" +
@@ -26,10 +31,5 @@ public class FoodDbHelper extends SQLiteOpenHelper {
                 FoodDatabase.UnexpectedShop.SHOP_NAME + " TEXT, " +
                 FoodDatabase.UnexpectedShop.IS_EXCLUDED + " INTEGER, " +
                 FoodDatabase.UnexpectedShop.ADD_DATE + " LONG " + ")");
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 }

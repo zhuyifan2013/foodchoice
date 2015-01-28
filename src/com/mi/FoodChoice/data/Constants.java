@@ -4,14 +4,15 @@ public class Constants {
 
     // DianPing APP constants
     public static final String APP_KEY = "6277236133";
-
-    public static final String APP_SECRET = "fd89998529e8442097da4a5f0af3529a";
+    public static final String APP_SECRET = "3ebc1672d9ae4c58a32ab97c7cdb653c";
 
     //Event id
-    public static final String EVENT_CLICK_PER_LANCH = "make_choice_per_lanch";
+    public static final String EVENT_MAKE_CHOICE = "make_choice";
+
+    public static final String EVENT_TRASH = "trash_shop";
+
 
     //key
-
     public static final String SHOP_ITEM = "shop_item";
 
     public static final String KEY_SHOP = "shop";
@@ -21,13 +22,6 @@ public class Constants {
     public static final String KEY_URI = "baidu_uri";
 
     public static final String KEY_COMMENT = "comment";
-
-    //dialog action id
-    public  static final String ACTION_ID = "action_id";
-
-    public static final int ACTION_ADD = 0;
-
-    public static final int ACTION_LONG_PRESS = 1;
 
     //preference
     public static final String PREF_FILE_NAME = "food_pref";
@@ -47,8 +41,11 @@ public class Constants {
 
     public static final int MSG_LOCATION_SEARCHED = 5;
 
+    public static final int MSG_SHOP_RECOVERED = 6;
+
+    public static final int MSG_ERROR = -1;
+
     //Date Format
     public static final String DATE_PATTEN_1 = "yyyy-MM-dd";
-
 
 }

@@ -20,6 +20,7 @@ import com.mi.FoodChoice.Handler.DianPingHandler;
 import com.mi.FoodChoice.data.Constants;
 import com.mi.FoodChoice.data.Shop;
 import com.mi.FoodChoice.data.ShopDeal;
+import com.mi.FoodChoice.model.DealsResponse;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -33,7 +34,6 @@ public class ShopDealsFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO 可能为null
         mShopDealList = getArguments().getParcelableArrayList(Constants.KEY_DEALS);
         mGson = new Gson();
     }
@@ -59,12 +59,15 @@ public class ShopDealsFragment extends ListFragment {
                         stringBuilder.append(",");
                     }
                 }
-                mShopDealList = mGson
+                DealsResponse dealsResponse = mGson
                         .fromJson(DianPingHandler.searchBatchDealsById(stringBuilder.toString()),
-                                Shop.class).getDeals();
-                Message msg = new Message();
-                msg.what = Constants.MSG_SEARCH_FINISH;
-                mHandler.sendMessage(msg);
+                                DealsResponse.class);
+                if (dealsResponse == null) {
+                    mHandler.sendEmptyMessage(Constants.MSG_ERROR);
+                    return;
+                }
+                mShopDealList = dealsResponse.getDeals();
+                mHandler.sendEmptyMessage(Constants.MSG_SEARCH_FINISH);
             }
         }).start();
     }
@@ -77,6 +80,9 @@ public class ShopDealsFragment extends ListFragment {
                     mAdapter = new MyAdapter(getActivity(), R.layout.shop_deal_list_item,
                             mShopDealList);
                     setListAdapter(mAdapter);
+                    break;
+                case Constants.MSG_ERROR:
+                    //TODO 需要测试下这里
                     break;
             }
             super.handleMessage(msg);
@@ -127,7 +133,6 @@ public class ShopDealsFragment extends ListFragment {
                     Float.toString(shopDeal.getList_price()))));
             holder.currentPrice.setText(String.format(getString(R.string.deal_current_price,
                     Float.toString(shopDeal.getCurrent_price()))));
-
             return convertView;
         }
 
