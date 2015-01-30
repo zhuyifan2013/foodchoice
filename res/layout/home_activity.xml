@@ -1,16 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:orientation="vertical"
+    android:background="@color/primary_color">
 
-    <fragment
-        android:id="@+id/make_choice"
-        android:tag="make_choice"
-        android:name="com.mi.FoodChoice.MakeChoiceFragment"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/home_logo"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/logo_margin_top"/>
+
+    <TextView
+        android:id="@+id/slogan_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/first_text_margin_top"
+        android:text="@string/splash_slogan_one"
+        android:textAppearance="@style/FoodTextAppearance.Medium"/>
+
+    <TextView
+        android:id="@+id/slogan_secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/text_margin_top"
+        android:text="@string/splash_slogan_two"
+        android:textAppearance="@style/FoodTextAppearance.Medium"/>
+
+    <TextView
+        android:id="@+id/slogan_third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/text_margin_top"
+        android:text="@string/splash_slogan_three"
+        android:textAppearance="@style/FoodTextAppearance.Medium"/>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name_special"
+        android:textAppearance="@style/FoodTextAppearance.Small.White"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/text_margin_bottom"/>
+
+</LinearLayout>

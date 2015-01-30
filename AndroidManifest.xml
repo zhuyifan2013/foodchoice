@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.mi.FoodChoice"
-          android:versionCode="2"
-          android:versionName="0.2">
+          android:versionCode="3"
+          android:versionName="0.2.1">
     <uses-sdk android:minSdkVersion="16"
               android:targetSdkVersion="19"/>
 
@@ -34,7 +34,6 @@
             android:name=".HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Main.NoActionBar"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -42,6 +41,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".MakeChoiceActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Main.NoActionBar"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MoreInfoActivity"
             android:theme="@style/Theme.Main"
@@ -81,7 +86,7 @@
         <!-- 高德地图-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="2924e576bb6646bbe80cce8e9aad316a"/>
+            android:value="14bbf71f7f72b280c8d7f866faaefa7e"/>
 
         <provider
             android:name="com.mi.FoodChoice.data.FoodDbProvider"

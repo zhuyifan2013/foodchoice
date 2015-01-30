@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">每食</string>
+    <string name="app_name_special">- 每食 -</string>
     <string name="delete">删除</string>
+    
+    <string name="splash_slogan_one">纷杂世界里</string>
+    <string name="splash_slogan_two">唯爱与美食不可辜负</string>
+    <string name="splash_slogan_three">: )</string>
 
     <string name="shop_avg_price"><xliff:g id="price">%1$s</xliff:g>&#160;元</string>
     <string name="shop_distance"><xliff:g id="distance">%1$s</xliff:g>&#160; m</string>

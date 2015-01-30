@@ -1,25 +1,29 @@
 package com.mi.FoodChoice;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.WindowManager;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
+import android.os.Handler;
+import android.view.animation.AlphaAnimation;
+import android.widget.TextView;
 import com.umeng.analytics.MobclickAgent;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends BaseActivity {
+
+    private TextView mFirstView, mSecondaryView, mThirdView;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
         setContentView(R.layout.home_activity);
-        initActionBar();
+        showSlogan();
+        (new Handler()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(HomeActivity.this, MakeChoiceActivity.class));
+                finish();
+            }
+        },4000);
     }
 
     @Override
@@ -34,24 +38,23 @@ public class HomeActivity extends Activity {
         super.onPause();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.setting:
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new MoreInfoFragment()).commit();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void initActionBar() {
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setStatusBarTintEnabled(true);
-        tintManager.setNavigationBarTintEnabled(true);
-        tintManager.setTintColor(getResources().getColor(R.color.dark_primary_color));
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayOptions(0);
-        }
+    private void showSlogan() {
+        mFirstView = (TextView) findViewById(R.id.slogan_first);
+        mSecondaryView = (TextView) findViewById(R.id.slogan_secondary);
+        mThirdView = (TextView) findViewById(R.id.slogan_third);
+        AlphaAnimation fadeIn1 = new AlphaAnimation(0.0f, 1.0f);
+        AlphaAnimation fadeIn2 = new AlphaAnimation(0.0f, 1.0f);
+        AlphaAnimation fadeIn3 = new AlphaAnimation(0.0f, 1.0f);
+        fadeIn1.setDuration(2000);
+        fadeIn2.setDuration(2000);
+        fadeIn3.setDuration(2000);
+        fadeIn1.setFillAfter(true);
+        fadeIn2.setFillAfter(true);
+        fadeIn3.setFillAfter(true);
+        fadeIn2.setStartOffset(800);
+        fadeIn3.setStartOffset(1600);
+        mFirstView.startAnimation(fadeIn1);
+        mSecondaryView.startAnimation(fadeIn2);
+        mThirdView.startAnimation(fadeIn3);
     }
 }
