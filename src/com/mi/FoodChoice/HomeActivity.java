@@ -9,9 +9,6 @@ import com.umeng.analytics.MobclickAgent;
 
 public class HomeActivity extends BaseActivity {
 
-    private TextView mFirstView, mSecondaryView, mThirdView;
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +36,9 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void showSlogan() {
-        mFirstView = (TextView) findViewById(R.id.slogan_first);
-        mSecondaryView = (TextView) findViewById(R.id.slogan_secondary);
-        mThirdView = (TextView) findViewById(R.id.slogan_third);
+        TextView mFirstView = (TextView) findViewById(R.id.slogan_first);
+        TextView mSecondaryView = (TextView) findViewById(R.id.slogan_secondary);
+        TextView mThirdView = (TextView) findViewById(R.id.slogan_third);
         AlphaAnimation fadeIn1 = new AlphaAnimation(0.0f, 1.0f);
         AlphaAnimation fadeIn2 = new AlphaAnimation(0.0f, 1.0f);
         AlphaAnimation fadeIn3 = new AlphaAnimation(0.0f, 1.0f);

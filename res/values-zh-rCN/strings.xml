@@ -46,8 +46,6 @@
 
     <string name="unexpected_empty_text">您还没舍弃过美食店</string>
 
-    <string name="latter_author_info">Coded by Yifan, Inspired by Lina</string>
-
     <string name="dialog_title_revert">恢复</string>
     <string name="dialog_message_revert">确定将此美食店恢复到待选列表中?</string>
 

@@ -13,7 +13,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="@dimen/header_padding"
         android:background="@color/primary_color">
         <TextView
             android:id="@+id/title"
@@ -29,22 +29,22 @@
             android:layout_weight="1"/>
         <ImageButton
             android:id="@+id/setting"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="@dimen/more_btn_length"
+            android:layout_height="@dimen/more_btn_length"
             android:layout_gravity="center_vertical"
             android:background="@drawable/more_info"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="@dimen/shop_details_height"
         android:orientation="vertical"
         android:background="@color/primary_color">
 
         <com.mi.FoodChoice.ui.CircleButton
             android:id="@+id/first_click"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/first_button_length"
+            android:layout_height="@dimen/first_button_length"
             android:layout_gravity="center"
             app:circle_icon="@drawable/icecream"
             app:circle_color="@color/accent_color"
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/progressbar_margin_top"
             app:matProg_barColor="@color/white"/>
 
         <LinearLayout
@@ -74,21 +74,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/no_shop_text_margin_top"
                 android:text="@string/no_shop1"
                 android:textAppearance="@style/FoodTextAppearance.Medium"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/no_shop_text_margin_top"
                 android:text="@string/no_shop2"
                 android:textAppearance="@style/FoodTextAppearance.Medium"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/no_shop_text_margin_top"
                 android:text="@string/no_shop3"
                 android:textAppearance="@style/FoodTextAppearance.Medium"/>
         </LinearLayout>
@@ -104,22 +104,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/shop_name_margin_top"
+                android:layout_marginLeft="@dimen/shop_name_margin_left"
+                android:layout_marginRight="@dimen/shop_name_margin_left"
                 android:singleLine="true"
                 android:clickable="true"
                 android:textAppearance="@style/FoodTextAppearance.Large"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/shop_price_margin_top"
                 android:gravity="center"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_marginRight="7dp"
+                    android:layout_width="@dimen/shop_details_image_length"
+                    android:layout_height="@dimen/shop_details_image_length"
+                    android:layout_marginRight="@dimen/shop_details_image_margin_right"
                     android:src="@drawable/card"/>
                 <TextView
                     android:id="@+id/shop_price"
@@ -132,12 +132,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/shop_distance_margin_top"
                 android:gravity="center">
                 <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_marginRight="7dp"
+                    android:layout_width="@dimen/shop_details_image_length"
+                    android:layout_height="@dimen/shop_details_image_length"
+                    android:layout_marginRight="@dimen/shop_details_image_margin_right"
                     android:src="@drawable/distance"/>
                 <TextView
                     android:id="@+id/shop_distance"
@@ -152,31 +152,31 @@
                 android:id="@+id/actions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="@dimen/function_button_margin_top"
                 android:gravity="center"
                 android:orientation="horizontal">
                 <com.mi.FoodChoice.ui.CircleButton
                     android:id="@+id/location"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/button_length"
+                    android:layout_height="@dimen/button_length"
                     app:circle_color="@color/accent_color"
                     app:circle_icon="@drawable/location"/>
                 <com.mi.FoodChoice.ui.CircleButton
                     android:id="@+id/make_choice"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/button_length"
+                    android:layout_height="@dimen/button_length"
                     app:circle_color="@color/accent_color"
                     app:circle_icon="@drawable/shuffle"/>
                 <com.mi.FoodChoice.ui.CircleButton
                     android:id="@+id/trash"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/button_length"
+                    android:layout_height="@dimen/button_length"
                     app:circle_color="@color/accent_color"
                     app:circle_icon="@drawable/trash"/>
                 <com.mi.FoodChoice.ui.CircleButton
                     android:id="@+id/comment"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/button_length"
+                    android:layout_height="@dimen/button_length"
                     app:circle_color="@color/accent_color"
                     app:circle_icon="@drawable/comment"/>
 
@@ -204,14 +204,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:padding="20dp"
+            android:padding="@dimen/deal_item_padding"
             android:gravity="center_vertical"
             android:clickable="false"
             android:background="@drawable/list_item_bg">
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="25dp"
+                android:layout_width="@dimen/deal_image_length"
+                android:layout_height="@dimen/deal_image_length"
+                android:layout_marginRight="@dimen/deal_image_margin_right"
                 android:clickable="false"
                 android:src="@drawable/coffee"/>
             <TextView
@@ -229,7 +229,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="@dimen/dianping_logo_height"
             android:src="@drawable/dianping"
             android:layout_marginBottom="@dimen/text_margin_bottom"/>
 

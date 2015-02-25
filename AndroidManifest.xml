@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.mi.FoodChoice"
-          android:versionCode="3"
-          android:versionName="0.2.1">
+          android:versionCode="4"
+          android:versionName="0.2.2">
     <uses-sdk android:minSdkVersion="16"
               android:targetSdkVersion="19"/>
 
@@ -86,7 +86,7 @@
         <!-- 高德地图-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="5c95f953db57e50364ea77ee8bfd5a66"/>
+            android:value="2924e576bb6646bbe80cce8e9aad316a"/>
 
         <provider
             android:name="com.mi.FoodChoice.data.FoodDbProvider"
