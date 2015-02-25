@@ -3,8 +3,8 @@ package com.mi.FoodChoice.data;
 public class Constants {
 
     // DianPing APP constants
-    public static final String APP_KEY = "6277236133";
-    public static final String APP_SECRET = "3ebc1672d9ae4c58a32ab97c7cdb653c";
+    public static final String APP_KEY = "33351406";
+    public static final String APP_SECRET = "99ea81b8aa1c499cafe3860f90cabc96";
 
     //Event id
     public static final String EVENT_MAKE_CHOICE = "make_choice";

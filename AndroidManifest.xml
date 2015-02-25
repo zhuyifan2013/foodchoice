@@ -86,7 +86,7 @@
         <!-- 高德地图-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="14bbf71f7f72b280c8d7f866faaefa7e"/>
+            android:value="5c95f953db57e50364ea77ee8bfd5a66"/>
 
         <provider
             android:name="com.mi.FoodChoice.data.FoodDbProvider"
